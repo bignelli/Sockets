@@ -16,18 +16,61 @@
 
 package nukeologist.sockets;
 
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import nukeologist.sockets.api.SocketsAPI;
+import nukeologist.sockets.client.ClientForgeEventHandler;
+import nukeologist.sockets.client.ClientModEventHandler;
+import nukeologist.sockets.common.cap.CapabilityEventHandler;
+import nukeologist.sockets.common.cap.CapabilityGemItem;
+import nukeologist.sockets.common.cap.CapabilitySocketableItem;
+import nukeologist.sockets.common.network.Network;
+import nukeologist.sockets.common.registry.SocketsBlocks;
+import nukeologist.sockets.common.registry.SocketsContainers;
+import nukeologist.sockets.common.registry.SocketsItems;
+import nukeologist.sockets.common.registry.SocketsTileEntities;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
-@Mod(Sockets.ID)
-public class Sockets {
-
-    public static final String ID = "sockets";
+@Mod(SocketsAPI.ID)
+public final class Sockets {
 
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final Marker CORE = MarkerManager.getMarker("SOCKETS");
 
     public Sockets() {
-        LOGGER.info("Sockets mod initializing!");
+        LOGGER.info(CORE, "Sockets mod initializing!");
+        final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modBus.addListener(this::commonSetup);
+        modBus.register(ClientModEventHandler.INSTANCE);
+
+        MinecraftForge.EVENT_BUS.register(ClientForgeEventHandler.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(CapabilityEventHandler.INSTANCE);
+
+        //Registry
+        SocketsItems.ITEMS.register(modBus);
+        SocketsBlocks.BLOCKS.register(modBus);
+        SocketsTileEntities.TILES.register(modBus);
+        SocketsContainers.CONTAINERS.register(modBus);
+        LOGGER.info(CORE, "Subscribed all event handlers.");
+    }
+
+    @SuppressWarnings("deprecation")
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        CapabilitySocketableItem.register();
+        CapabilityGemItem.register();
+        DeferredWorkQueue.runLater(Network::register);
+        LOGGER.info(CORE, "Registered Capabilities and Network");
+    }
+
+    public static ResourceLocation modLoc(final String path) {
+        return new ResourceLocation(SocketsAPI.ID, path);
     }
 }
