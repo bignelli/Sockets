@@ -120,9 +120,10 @@ public enum ClientForgeEventHandler {
                     RenderSystem.pushMatrix();
                     final float previous = renderer.zLevel;
                     renderer.zLevel = 200f;
-                    //RenderSystem.translatef(8F, 8F, 0F);
-                    RenderSystem.scalef(0.8f, 0.8f, 1f);
-                    renderer.renderItemAndEffectIntoGUI(test, (int)(slot.xPos * 1.25) + 2, (int)(slot.yPos * 1.25) + 2);
+                    final float factor = 0.8f; //maybe change this value as in config? Also 16 because that's the size of an item.
+                    RenderSystem.translatef(slot.xPos + ((16 - 16 * factor) / 2), slot.yPos + ((16 - 16 * factor) / 2), 0F);
+                    RenderSystem.scalef(factor, factor, 1f);
+                    renderer.renderItemAndEffectIntoGUI(test, 0, 0);
                     renderer.zLevel = previous;
                     RenderSystem.popMatrix();
                 }
