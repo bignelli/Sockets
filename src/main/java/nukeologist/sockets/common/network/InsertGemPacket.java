@@ -18,6 +18,7 @@ package nukeologist.sockets.common.network;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.CraftingResultSlot;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -52,9 +53,9 @@ public class InsertGemPacket {
         public static void handle(final InsertGemPacket pkt, Supplier<NetworkEvent.Context> ctx) {
             ctx.get().enqueueWork(() -> {
                 final ServerPlayerEntity sender = ctx.get().getSender();
-                if (sender == null) return;
+                if (sender == null || sender.openContainer == null) return;
                 final Slot slot = validateAndGet(sender.openContainer, pkt.slot);
-                if (slot == null) return;
+                if (slot == null || slot instanceof CraftingResultSlot) return;
                 final ItemStack gemStack = sender.inventory.getItemStack();
                 if (gemStack.isEmpty()) return;
                 final ItemStack socketStack = slot.getStack();

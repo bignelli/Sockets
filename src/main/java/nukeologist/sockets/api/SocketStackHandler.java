@@ -48,6 +48,15 @@ public class SocketStackHandler extends ItemStackHandler {
         }
     }
 
+    public void forEachExcluding(final NonNullConsumer<IGem> action, final IGem exclusion) {
+        for (final ItemStack stack : stacks) {
+            SocketsAPI.getGem(stack).ifPresent(gem -> {
+                if (!gem.equals(exclusion)) action.accept(gem);
+            });
+
+        }
+    }
+
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
         return SocketsAPI.getGem(stack).map(item::accepts).orElse(false);

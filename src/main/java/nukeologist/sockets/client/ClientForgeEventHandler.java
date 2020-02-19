@@ -20,6 +20,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.screen.inventory.CreativeScreen;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -70,8 +71,20 @@ public enum ClientForgeEventHandler {
         final boolean canInsert = gem.map(g -> socket.map(s -> ItemHandlerHelper.insertItem(s.getStackHandler(), copyStack, true).isEmpty()).orElse(false)).orElse(false);
         if (accepts && canInsert) {
             event.setCanceled(true);
-            Network.CHANNEL.sendToServer(new InsertGemPacket(slot.slotNumber));
+            Network.CHANNEL.sendToServer(new InsertGemPacket(getSlotNumber((ContainerScreen) event.getGui(), slot)));
+            //This is next part is to auto sync the client. If the info sent to the server was false, then this will just deceive the client.
+            final ItemStack copy = holdingStack.split(1);
+            socket.ifPresent(s -> {
+                if (!ItemHandlerHelper.insertItem(s.getStackHandler(), copy, false).isEmpty()) {
+                    holdingStack.grow(1); //should never reach this line.
+                }
+            });
         }
+    }
+
+    //Creative screen has a finicky container (OnlyIn client!)
+    private int getSlotNumber(final ContainerScreen screen, final Slot slot) {
+        return screen instanceof CreativeScreen ? slot.slotNumber - (screen.getContainer()).inventorySlots.size() + 9 + 36 : slot.slotNumber;
     }
 
     private boolean checkEvent(GuiScreenEvent.MouseInputEvent event) {

@@ -17,8 +17,7 @@
 package nukeologist.sockets.common.cap;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,8 +34,11 @@ public enum CapabilityEventHandler {
     @SubscribeEvent
     public void attachCap(AttachCapabilitiesEvent<ItemStack> event) {
         final ItemStack stack = event.getObject();
-        if (stack.isEmpty() || stack.getItem() != Items.DIAMOND_SWORD) return;
-        event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider());
+        if (stack.isEmpty()) return;
+        final Item item = stack.getItem();
+        if ((item instanceof TieredItem && ((TieredItem) item).getTier() == ItemTier.DIAMOND)
+                || (item instanceof ArmorItem && ((ArmorItem) item).getArmorMaterial() == ArmorMaterial.DIAMOND))
+            event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider());
     }
 
     @SubscribeEvent
