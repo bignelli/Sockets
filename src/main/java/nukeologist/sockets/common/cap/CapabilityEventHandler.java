@@ -17,9 +17,13 @@
 package nukeologist.sockets.common.cap;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.*;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -44,14 +48,44 @@ public enum CapabilityEventHandler {
     @SubscribeEvent
     public void gemTick(LivingEvent.LivingUpdateEvent event) {
         final LivingEntity entity = event.getEntityLiving();
-        entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(this::tickGems);
+        entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> tickGems(h, entity));
     }
 
-    private void tickGems(final IItemHandler inv) {
+    private void tickGems(final IItemHandler inv, LivingEntity entity) {
         for (int i = 0; i < inv.getSlots(); i++) {
             final ItemStack stack = inv.getStackInSlot(i);
             if (stack.isEmpty()) continue;
-            SocketsAPI.getSockets(stack).ifPresent(item -> item.getStackHandler().forEach(gem -> gem.socketTick(item)));
+            SocketsAPI.getSockets(stack).ifPresent(item -> item.getStackHandler().forEach(gem -> gem.socketTick(item, entity)));
+        }
+    }
+
+    //CAPABILITY SYNCING
+
+    private void addListeners(ServerPlayerEntity player, Container container) {
+        container.addListener(new CapabilityContainerListener(player));
+    }
+
+    @SubscribeEvent
+    public void playerLoggedIn(final PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getPlayer() instanceof ServerPlayerEntity) {
+            final ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+            addListeners(player, player.container);
+        }
+    }
+
+    @SubscribeEvent
+    public void playerClone(final PlayerEvent.Clone event) {
+        if (event.getPlayer() instanceof ServerPlayerEntity) {
+            final ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+            addListeners(player, player.container);
+        }
+    }
+
+    @SubscribeEvent
+    public void containerOpen(final PlayerContainerEvent.Open event) {
+        if (event.getPlayer() instanceof ServerPlayerEntity) {
+            final ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+            addListeners(player, event.getContainer());
         }
     }
 }

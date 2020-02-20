@@ -26,11 +26,13 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiContainerEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.ItemHandlerHelper;
 import nukeologist.sockets.Sockets;
 import nukeologist.sockets.api.SocketsAPI;
@@ -41,14 +43,13 @@ import nukeologist.sockets.common.network.Network;
 
 import java.util.List;
 
-public enum ClientForgeEventHandler {
-
-    INSTANCE;
+@Mod.EventBusSubscriber(modid = SocketsAPI.ID, value = Dist.CLIENT)
+public final class ClientForgeEventHandler {
 
     private static final ResourceLocation SOCKET = Sockets.modLoc("textures/gui/socket.png");
 
     @SubscribeEvent
-    public void onContainerForeground(GuiContainerEvent.DrawForeground event) {
+    public static void onContainerForeground(GuiContainerEvent.DrawForeground event) {
         final ContainerScreen screen = event.getGuiContainer();
         final ItemStack holdingStack = screen.getMinecraft().player.inventory.getItemStack();
         if (holdingStack.isEmpty()) return;
@@ -57,11 +58,12 @@ public enum ClientForgeEventHandler {
 
     //TODO figure out what the int mousebutton means, and cancel if it doesn't match left click ?
     @SubscribeEvent //fires before IGuiEventListener#mouseReleased is handled. Cancel to bypass it.
-    public void onMouseReleased(GuiScreenEvent.MouseReleasedEvent.Pre event) {
+    public static void onMouseReleased(GuiScreenEvent.MouseReleasedEvent.Pre event) {
         if (checkEvent(event)) return;
 
         //If it got here, then we can proceed with insertion.
-        final ItemStack holdingStack = event.getGui().getMinecraft().player.inventory.getItemStack();
+        final Minecraft mc = event.getGui().getMinecraft();
+        final ItemStack holdingStack = mc.player.inventory.getItemStack();
         final ItemStack copyStack = holdingStack.copy();
         copyStack.setCount(1);
         final Slot slot = ((ContainerScreen) event.getGui()).getSlotUnderMouse();
@@ -70,8 +72,11 @@ public enum ClientForgeEventHandler {
         final boolean accepts = gem.map(g -> socket.map(s -> s.accepts(g)).orElse(false)).orElse(false);
         final boolean canInsert = gem.map(g -> socket.map(s -> ItemHandlerHelper.insertItem(s.getStackHandler(), copyStack, true).isEmpty()).orElse(false)).orElse(false);
         if (accepts && canInsert) {
+            if (!(event.getGui() instanceof CreativeScreen)) {
+                //do not even bother sending if it is the creative menu, as the slotnumber is plain wrong on the server.
+                Network.CHANNEL.sendToServer(new InsertGemPacket(slot.slotNumber));
+            }
             event.setCanceled(true);
-            Network.CHANNEL.sendToServer(new InsertGemPacket(getSlotNumber((ContainerScreen) event.getGui(), slot)));
             //This is next part is to auto sync the client. If the info sent to the server was false, then this will just deceive the client.
             final ItemStack copy = holdingStack.split(1);
             socket.ifPresent(s -> {
@@ -82,12 +87,7 @@ public enum ClientForgeEventHandler {
         }
     }
 
-    //Creative screen has a finicky container (OnlyIn client!)
-    private int getSlotNumber(final ContainerScreen screen, final Slot slot) {
-        return screen instanceof CreativeScreen ? slot.slotNumber - (screen.getContainer()).inventorySlots.size() + 9 + 36 : slot.slotNumber;
-    }
-
-    private boolean checkEvent(GuiScreenEvent.MouseInputEvent event) {
+    private static boolean checkEvent(GuiScreenEvent.MouseInputEvent event) {
         if (!(event.getGui() instanceof ContainerScreen)) return true;
         final Minecraft mc = event.getGui().getMinecraft();
         if (mc.player == null) return true;
@@ -106,7 +106,7 @@ public enum ClientForgeEventHandler {
     }
 
     @SubscribeEvent
-    public void onTooltipEvent(ItemTooltipEvent event) {
+    public static void onTooltipEvent(ItemTooltipEvent event) {
         final ItemStack stack = event.getItemStack();
         if (stack.isEmpty()) return;
         if (!SocketsAPI.getSockets(stack).isPresent()) return;
@@ -115,7 +115,7 @@ public enum ClientForgeEventHandler {
                 .ifPresent(h -> h.forEach(gem -> list.addAll(gem.getExtraTooltip())));
     }
 
-    private void drawSockets(ContainerScreen screen) {
+    private static void drawSockets(ContainerScreen screen) {
         final List<Slot> slots = screen.getContainer().inventorySlots;
         RenderSystem.color4f(1f, 1f, 1f, 1f);
         RenderSystem.disableDepthTest();

@@ -16,6 +16,7 @@
 
 package nukeologist.sockets.common.item;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -70,27 +71,28 @@ public class GemItem extends Item {
         return CapabilityGemItem.createProvider(new IGem() {
 
             @Override
-            public boolean canEquipOn(ISocketableItem item) {
+            public boolean canEquipOn(ISocketableItem item, LivingEntity entity) {
                 return canEquip == null || canEquip.test(item);
             }
 
             @Override
-            public boolean canUnequipOn(ISocketableItem item) {
+            public boolean canUnequipOn(ISocketableItem item, LivingEntity entity) {
                 return canUnequip == null || canUnequip.test(item);
             }
 
             @Override
-            public void equipped(ISocketableItem item) {
+            public void equipped(ISocketableItem item, LivingEntity entity) {
+                this.playEquipSound(item, entity);
                 if (equip != null) equip.accept(item);
             }
 
             @Override
-            public void unequipped(ISocketableItem item) {
+            public void unequipped(ISocketableItem item, LivingEntity entity) {
                 if (unequip != null) unequip.accept(item);
             }
 
             @Override
-            public void socketTick(ISocketableItem item) {
+            public void socketTick(ISocketableItem item, LivingEntity entity) {
                 if (tick != null) tick.accept(item);
             }
         });

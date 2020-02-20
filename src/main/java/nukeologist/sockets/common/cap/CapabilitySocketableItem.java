@@ -58,8 +58,20 @@ public final class CapabilitySocketableItem {
 
         private final SocketStackHandler handler;
 
+        private int size = 1;
+
         public SocketWrapper() {
             handler = new SocketStackHandler(this);
+        }
+
+        public SocketWrapper(int size) {
+            this.size = Math.min(size, 4);
+            handler = new SocketStackHandler(this);
+        }
+
+        @Override
+        public int getSlots() {
+            return size;
         }
 
         @Override

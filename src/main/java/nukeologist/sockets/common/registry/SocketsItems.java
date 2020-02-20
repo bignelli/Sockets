@@ -20,11 +20,14 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import nukeologist.sockets.api.SocketsAPI;
 import nukeologist.sockets.common.item.GemItem;
+
+import java.util.Comparator;
 
 public final class SocketsItems {
 
@@ -36,12 +39,19 @@ public final class SocketsItems {
         public ItemStack createIcon() {
             return new ItemStack(DIAMOND_GEM.get());
         }
+
+        @Override
+        public void fill(NonNullList<ItemStack> items) {
+            super.fill(items);
+            items.sort(Comparator.comparing(s -> s.getItem() instanceof BlockItem ? ("block" + ((BlockItem) s.getItem()).getBlock().getRegistryName().toString()) : s.getItem().getRegistryName().toString()));
+        }
     };
 
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, SocketsAPI.ID);
 
     public static final RegistryObject<Item> DIAMOND_GEM = ITEMS.register("diamond_gem", () -> new GemItem(defaultGem()).onEquip(s -> System.out.println("Equipped!")));
     public static final RegistryObject<Item> SOCKET_REMOVER = ITEMS.register("socket_remover", () -> new BlockItem(SocketsBlocks.SOCKET_REMOVER.get(), defaultGem()));
+    public static final RegistryObject<Item> EMERALD_GEM = ITEMS.register("emerald_gem", () -> new GemItem(defaultGem()));
 
     private static Item.Properties defaultGem() {
         return new Item.Properties()

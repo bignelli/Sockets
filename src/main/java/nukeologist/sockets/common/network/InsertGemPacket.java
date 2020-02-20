@@ -24,6 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.ItemHandlerHelper;
 import nukeologist.sockets.api.SocketsAPI;
 import nukeologist.sockets.api.cap.IGem;
@@ -66,11 +67,15 @@ public class InsertGemPacket {
 
                 //Finally after validation:
                 socket.ifPresent(s -> gem.ifPresent(g -> {
-                    if (!g.canEquipOn(s)) return;
+                    if (!g.canEquipOn(s, sender)) return;
                     if (!s.accepts(g)) return;
                     final ItemStack copy = gemStack.split(1);
                     if (ItemHandlerHelper.insertItem(s.getStackHandler(), copy, false).isEmpty()) {
-                        SocketsAPI.getGem(copy).ifPresent(gg -> gg.equipped(s));
+                        SocketsAPI.getGem(copy).ifPresent(gg -> gg.equipped(s, sender));
+                        //Network.CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> sender),
+                        //        new SyncSocketPacket(sender.getEntityId(), pkt.slot, socketStack)); //TODO change socketSlot to actual slot instead of 0 //TEMPORARY
+                        //sender.openContainer.detectAndSendChanges(); //TODO figure out why the client overrides the NBT
+                        slot.inventory.markDirty();
                     } else {
                         gemStack.grow(1);
                     }
@@ -79,7 +84,7 @@ public class InsertGemPacket {
             ctx.get().setPacketHandled(true);
         }
 
-        private static Slot validateAndGet(Container container, int slot) {
+        public static Slot validateAndGet(Container container, int slot) {
             final List<Slot> slots = container.inventorySlots;
             final int size = slots.size();
             if (slot < size && slot >= 0) {

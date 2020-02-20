@@ -18,22 +18,24 @@ package nukeologist.sockets.client;
 
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.data.DataGenerator;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.model.generators.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import nukeologist.sockets.api.SocketsAPI;
 import nukeologist.sockets.client.datagen.EnglishProvider;
 import nukeologist.sockets.client.datagen.ItemModels;
 import nukeologist.sockets.client.datagen.PortugueseProvider;
 import nukeologist.sockets.client.gui.SocketRemoverScreen;
 import nukeologist.sockets.common.registry.SocketsContainers;
 
-public enum ClientModEventHandler {
-
-    INSTANCE;
+@Mod.EventBusSubscriber(modid = SocketsAPI.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+public final class ClientModEventHandler {
 
     @SubscribeEvent
-    public void onData(GatherDataEvent event) {
+    public static void onData(GatherDataEvent event) {
         final DataGenerator gen = event.getGenerator();
         final ExistingFileHelper helper = event.getExistingFileHelper();
 
@@ -48,7 +50,7 @@ public enum ClientModEventHandler {
     }
 
     @SubscribeEvent
-    public void onClientSetup(FMLClientSetupEvent event) {
+    public static void onClientSetup(FMLClientSetupEvent event) {
         ScreenManager.registerFactory(SocketsContainers.SOCKET_REMOVER.get(), SocketRemoverScreen::new);
     }
 

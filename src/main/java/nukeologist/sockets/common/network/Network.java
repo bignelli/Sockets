@@ -42,6 +42,8 @@ public class Network {
     //When making a new packet, always bump major to avoid problems
     public static void register() {
         message(InsertGemPacket.class, InsertGemPacket::encode, InsertGemPacket::decode, InsertGemPacket.Handler::handle);
+        message(SyncSocketPacket.class, SyncSocketPacket::encode, SyncSocketPacket::decode, SyncSocketPacket.Handler::handle);
+        message(BulkSyncSocketPacket.class, BulkSyncSocketPacket::encode, BulkSyncSocketPacket::decode, BulkSyncSocketPacket.Handler::handle);
     }
 
     private static <C> void message(final Class<C> clazz, final BiConsumer<C, PacketBuffer> encoder, final Function<PacketBuffer, C> decoder, final BiConsumer<C, Supplier<NetworkEvent.Context>> consumer) {

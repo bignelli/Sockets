@@ -16,6 +16,10 @@
 
 package nukeologist.sockets.api.cap;
 
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 
 import java.util.Collections;
@@ -30,38 +34,44 @@ public interface IGem {
     /**
      * Determines if this ItemStack can be equipped in a socket.
      *
-     * @param item item with the socket
+     * @param item   item with the socket
+     * @param entity entity with this in the inventory
      * @return true if it can be equipped, false otherwise.
      */
-    default boolean canEquipOn(ISocketableItem item) {
+    default boolean canEquipOn(ISocketableItem item, LivingEntity entity) {
         return true;
     }
 
     /**
      * Determines if this ItemStack can be unequipped from a socket.
      *
-     * @param item item with the socket
+     * @param item   item with the socket
+     * @param entity entity with this in the inventory
      * @return true if can be unequipped, false otherwise.
      */
-    default boolean canUnequipOn(ISocketableItem item) {
+    default boolean canUnequipOn(ISocketableItem item, LivingEntity entity) {
         return true;
     }
 
     /**
      * Called when this ItemStack was equipped on a socket.
+     * By default, plays a sound.
      *
-     * @param item item with the socket.
+     * @param item   item with the socket.
+     * @param entity entity with this in the inventory
+     * @see IGem#playEquipSound(ISocketableItem, LivingEntity)
      */
-    default void equipped(ISocketableItem item) {
-
+    default void equipped(ISocketableItem item, LivingEntity entity) {
+        this.playEquipSound(item, entity);
     }
 
     /**
      * Called when this ItemStack was unequipped on a socket.
      *
-     * @param item item with the socket.
+     * @param item   item with the socket.
+     * @param entity entity with this in the inventory
      */
-    default void unequipped(ISocketableItem item) {
+    default void unequipped(ISocketableItem item, LivingEntity entity) {
 
     }
 
@@ -69,9 +79,10 @@ public interface IGem {
      * Called every tick while the ItemStack is on a socket. Do NOT modify
      * the {@link nukeologist.sockets.api.SocketStackHandler} inventory.
      *
-     * @param item item with the socket.
+     * @param item   item with the socket.
+     * @param entity entity with this in the inventory
      */
-    default void socketTick(ISocketableItem item) {
+    default void socketTick(ISocketableItem item, LivingEntity entity) {
 
     }
 
@@ -83,5 +94,19 @@ public interface IGem {
      */
     default List<ITextComponent> getExtraTooltip() {
         return Collections.emptyList();
+    }
+
+    /**
+     * Plays a sound when equipped (called by {@link IGem#equipped(ISocketableItem, LivingEntity)})
+     * by default.
+     *
+     * @param item   item with the socket.
+     * @param entity entity with this in the inventory
+     */
+    default void playEquipSound(ISocketableItem item, LivingEntity entity) {
+        final PlayerEntity player = entity.world.isRemote() && entity instanceof PlayerEntity ? (PlayerEntity) entity : null;
+        entity.world.playSound(player, entity.getPosition(),
+                SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
+                SoundCategory.NEUTRAL, 1.0f, 1.0f);
     }
 }

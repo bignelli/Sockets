@@ -24,8 +24,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import nukeologist.sockets.api.SocketsAPI;
-import nukeologist.sockets.client.ClientForgeEventHandler;
-import nukeologist.sockets.client.ClientModEventHandler;
 import nukeologist.sockets.common.cap.CapabilityEventHandler;
 import nukeologist.sockets.common.cap.CapabilityGemItem;
 import nukeologist.sockets.common.cap.CapabilitySocketableItem;
@@ -49,9 +47,7 @@ public final class Sockets {
         LOGGER.info(CORE, "Sockets mod initializing!");
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::commonSetup);
-        modBus.register(ClientModEventHandler.INSTANCE);
 
-        MinecraftForge.EVENT_BUS.register(ClientForgeEventHandler.INSTANCE);
         MinecraftForge.EVENT_BUS.register(CapabilityEventHandler.INSTANCE);
 
         //Registry
