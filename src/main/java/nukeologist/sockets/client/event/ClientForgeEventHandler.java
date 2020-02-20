@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package nukeologist.sockets.client;
+package nukeologist.sockets.client.event;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -35,6 +35,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.ItemHandlerHelper;
 import nukeologist.sockets.Sockets;
+import nukeologist.sockets.api.SocketStackHandler;
 import nukeologist.sockets.api.SocketsAPI;
 import nukeologist.sockets.api.cap.IGem;
 import nukeologist.sockets.api.cap.ISocketableItem;
@@ -125,23 +126,59 @@ public final class ClientForgeEventHandler {
             final LazyOptional<ISocketableItem> socket = SocketsAPI.getSockets(stack);
             socket.ifPresent(s -> {
                 screen.getMinecraft().getTextureManager().bindTexture(SOCKET);
+                final int size = s.getSlots();
                 //int x0, int y0, int z, float u0, float v0, int width, int height, int textureHeight, int textureWidth
-                AbstractGui.blit(slot.xPos, slot.yPos, 300, 0, 0, 16, 16, 16, 16);
-                final ItemStack test = s.getStackHandler().getStackInSlot(0);
-                if (!test.isEmpty()) {
-                    final ItemRenderer renderer = screen.getMinecraft().getItemRenderer();
-                    RenderSystem.pushMatrix();
-                    final float previous = renderer.zLevel;
-                    renderer.zLevel = 200f;
-                    final float factor = 0.8f; //maybe change this value as in config? Also 16 because that's the size of an item.
-                    RenderSystem.translatef(slot.xPos + ((16 - 16 * factor) / 2), slot.yPos + ((16 - 16 * factor) / 2), 0F);
-                    RenderSystem.scalef(factor, factor, 1f);
-                    renderer.renderItemAndEffectIntoGUI(test, 0, 0);
-                    renderer.zLevel = previous;
-                    RenderSystem.popMatrix();
-                }
+                AbstractGui.blit(slot.xPos, slot.yPos, 300, (size - 1) * 16, 0, 16, 16, 16, 64);
+                renderSocketGems(screen.getMinecraft(), s, slot, 0.5f); //maybe change the factor value in config? Also 16 because that's the size of an item.
             });
         }
         RenderSystem.enableDepthTest();
+    }
+
+    //Yes, while hardcoded, more in the same slot would probably be a nightmare for the user. Hardcoded for the socket texture.
+    private static void renderSocketGems(final Minecraft mc, final ISocketableItem item, final Slot slot, final float factor) {
+        final ItemRenderer renderer = mc.getItemRenderer();
+        final SocketStackHandler handler = item.getStackHandler();
+        final int size = item.getSlots();
+        final ItemStack first = handler.getStackInSlot(0);
+        switch (size) {
+            case 1:
+                if (first.isEmpty()) return;
+                renderSocketGem(renderer, first, slot.xPos, slot.yPos, factor);
+                break;
+            case 2:
+                final ItemStack second = handler.getStackInSlot(1);
+                if (!first.isEmpty()) renderSocketGem(renderer, first, slot.xPos - 3, slot.yPos + 3, factor);
+                if (!second.isEmpty()) renderSocketGem(renderer, second, slot.xPos + 3, slot.yPos - 3, factor);
+                break;
+            case 3:
+                final ItemStack secondd = handler.getStackInSlot(1); //big brain
+                final ItemStack third = handler.getStackInSlot(2);
+                if (!first.isEmpty()) renderSocketGem(renderer, first, slot.xPos - 4, slot.yPos - 4, factor);
+                if (!secondd.isEmpty()) renderSocketGem(renderer, secondd, slot.xPos + 4, slot.yPos - 4, factor);
+                if (!third.isEmpty()) renderSocketGem(renderer, third, slot.xPos, slot.yPos + 4, factor);
+                break;
+            case 4:
+            default:
+                final ItemStack seconddd = handler.getStackInSlot(1); //EPIC big brain
+                final ItemStack thirdd = handler.getStackInSlot(2);
+                final ItemStack fourth = handler.getStackInSlot(3);
+                if (!first.isEmpty()) renderSocketGem(renderer, first, slot.xPos - 4, slot.yPos - 4, factor);
+                if (!seconddd.isEmpty()) renderSocketGem(renderer, seconddd, slot.xPos + 4, slot.yPos - 4, factor);
+                if (!thirdd.isEmpty()) renderSocketGem(renderer, thirdd, slot.xPos - 4, slot.yPos + 4, factor);
+                if (!fourth.isEmpty()) renderSocketGem(renderer, fourth, slot.xPos + 4, slot.yPos + 4, factor);
+                break;
+        }
+    }
+
+    private static void renderSocketGem(final ItemRenderer renderer, final ItemStack stack, final int x, final int y, final float factor) {
+        RenderSystem.pushMatrix();
+        final float previous = renderer.zLevel;
+        renderer.zLevel = 200f;
+        RenderSystem.translatef(x + ((16 - 16 * factor) / 2), y + ((16 - 16 * factor) / 2), 0F);
+        RenderSystem.scalef(factor, factor, 1f);
+        renderer.renderItemAndEffectIntoGUI(stack, 0, 0);
+        renderer.zLevel = previous;
+        RenderSystem.popMatrix();
     }
 }

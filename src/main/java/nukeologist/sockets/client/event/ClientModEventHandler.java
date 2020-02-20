@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package nukeologist.sockets.client;
+package nukeologist.sockets.client.event;
 
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.data.DataGenerator;
