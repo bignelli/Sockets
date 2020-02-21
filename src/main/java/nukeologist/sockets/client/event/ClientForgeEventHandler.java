@@ -131,7 +131,7 @@ public final class ClientForgeEventHandler {
                 final int size = s.getSlots();
                 //int x0, int y0, int z, float u0, float v0, int width, int height, int textureHeight, int textureWidth
                 AbstractGui.blit(slot.xPos, slot.yPos, 300, (size - 1) * 16, 0, 16, 16, 16, 64);
-                renderSocketGems(screen.getMinecraft(), s, slot, 0.5f); //maybe change the factor value in config? Also 16 because that's the size of an item.
+                renderSocketGems(screen.getMinecraft(), s, slot, 0.8f); //maybe change the factor value in config? Also 16 because that's the size of an item.
             });
         }
         RenderSystem.enableDepthTest();

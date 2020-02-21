@@ -25,6 +25,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import nukeologist.sockets.api.SocketsAPI;
+import nukeologist.sockets.client.datagen.BlockModels;
 import nukeologist.sockets.client.datagen.EnglishProvider;
 import nukeologist.sockets.client.datagen.ItemModels;
 import nukeologist.sockets.client.datagen.PortugueseProvider;
@@ -42,6 +43,7 @@ public final class ClientModEventHandler {
         if (event.includeClient()) {
             gen.addProvider(new EnglishProvider(gen));
             gen.addProvider(new PortugueseProvider(gen));
+            gen.addProvider(new BlockModels(gen, helper));
             gen.addProvider(new ItemModels(gen, helper));
         }
         if (event.includeServer()) {

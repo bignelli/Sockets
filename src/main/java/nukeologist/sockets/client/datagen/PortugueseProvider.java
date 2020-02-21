@@ -16,10 +16,15 @@
 
 package nukeologist.sockets.client.datagen;
 
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
 import nukeologist.sockets.api.SocketsAPI;
+import nukeologist.sockets.common.registry.SocketsBlocks;
 import nukeologist.sockets.common.registry.SocketsItems;
+
+import java.util.function.Supplier;
 
 public class PortugueseProvider extends LanguageProvider {
 
@@ -29,6 +34,23 @@ public class PortugueseProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        add(SocketsItems.DIAMOND_GEM.get(), "Gema de Diamante");
+        //blocks
+        block(SocketsBlocks.SOCKET_REMOVER, "Removedor de Soquetes");
+
+        //items
+        add(SocketsItems.DIAMOND_GEM, "Gema de Diamante");
+        //add(SocketsItems.SOCKET_REMOVER, "Removedor de Soquetes");
+        add(SocketsItems.EMERALD_GEM, "Gema de Esmeralda");
+        add(SocketsItems.ENCHANTFUL_GEM, "Gema Encant\u00E1vel");
+
+        add("itemGroup.sockets", "Soquetes");
+    }
+
+    private void add(final Supplier<Item> item, final String name) {
+        add(item.get(), name);
+    }
+
+    private void block(final Supplier<Block> item, final String name) {
+        add(item.get(), name);
     }
 }

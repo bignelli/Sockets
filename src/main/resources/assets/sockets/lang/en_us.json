@@ -1,3 +1,7 @@
 {
-  "item.sockets.diamond_gem": "Diamond Gem"
+  "block.sockets.socket_remover": "Socket Remover",
+  "item.sockets.diamond_gem": "Diamond Gem",
+  "item.sockets.emerald_gem": "Emerald Gem",
+  "item.sockets.enchantful_gem": "Enchantful Gem",
+  "itemGroup.sockets": "Sockets"
 }

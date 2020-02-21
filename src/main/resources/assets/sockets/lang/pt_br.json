@@ -1,3 +1,7 @@
 {
-  "item.sockets.diamond_gem": "Gema de Diamante"
+  "block.sockets.socket_remover": "Removedor de Soquetes",
+  "item.sockets.diamond_gem": "Gema de Diamante",
+  "item.sockets.emerald_gem": "Gema de Esmeralda",
+  "item.sockets.enchantful_gem": "Gema Encant\u00E1vel",
+  "itemGroup.sockets": "Soquetes"
 }

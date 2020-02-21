@@ -18,39 +18,26 @@ package nukeologist.sockets.client.datagen;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.Item;
-import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ExistingFileHelper;
 import nukeologist.sockets.api.SocketsAPI;
 import nukeologist.sockets.common.registry.SocketsBlocks;
-import nukeologist.sockets.common.registry.SocketsItems;
 
 import java.util.function.Supplier;
 
-public class EnglishProvider extends LanguageProvider {
+public class BlockModels extends BlockStateProvider {
 
-    public EnglishProvider(DataGenerator gen) {
-        super(gen, SocketsAPI.ID, "en_us");
+    public BlockModels(DataGenerator gen, ExistingFileHelper exFileHelper) {
+        super(gen, SocketsAPI.ID, exFileHelper);
     }
 
     @Override
-    protected void addTranslations() {
-        //blocks
-        block(SocketsBlocks.SOCKET_REMOVER, "Socket Remover");
-
-        //items
-        add(SocketsItems.DIAMOND_GEM, "Diamond Gem");
-        //add(SocketsItems.SOCKET_REMOVER, "Socket Remover");
-        add(SocketsItems.EMERALD_GEM, "Emerald Gem");
-        add(SocketsItems.ENCHANTFUL_GEM, "Enchantful Gem");
-
-        add("itemGroup.sockets", "Sockets");
+    protected void registerStatesAndModels() {
+        horizontalBlock(SocketsBlocks.SOCKET_REMOVER, modLoc("block/socket_remover_side"), modLoc("block/socket_remover_front"), modLoc("block/socket_remover_top"));
     }
 
-    private void add(final Supplier<Item> item, final String name) {
-        add(item.get(), name);
-    }
-
-    private void block(final Supplier<Block> item, final String name) {
-        add(item.get(), name);
+    private void horizontalBlock(Supplier<Block> block, ResourceLocation side, ResourceLocation front, ResourceLocation rest) {
+        horizontalBlock(block.get(), side, front, rest);
     }
 }

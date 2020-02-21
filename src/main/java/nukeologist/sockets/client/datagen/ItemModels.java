@@ -16,6 +16,7 @@
 
 package nukeologist.sockets.client.datagen;
 
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -24,6 +25,7 @@ import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import nukeologist.sockets.api.SocketsAPI;
+import nukeologist.sockets.common.registry.SocketsBlocks;
 import nukeologist.sockets.common.registry.SocketsItems;
 
 import java.util.function.Supplier;
@@ -37,6 +39,20 @@ public class ItemModels extends ItemModelProvider {
     @Override
     protected void registerModels() {
         generated(SocketsItems.DIAMOND_GEM);
+        generated(SocketsItems.EMERALD_GEM);
+        generated(SocketsItems.ENCHANTFUL_GEM);
+
+        //blocks
+        itemBlock(SocketsBlocks.SOCKET_REMOVER);
+    }
+
+    private void itemBlock(final Block block) {
+        final String path = block.getRegistryName().getPath();
+        getBuilder(path).parent(new ModelFile.UncheckedModelFile(modLoc("block/" + path)));
+    }
+
+    private void itemBlock(final Supplier<Block> block) {
+        itemBlock(block.get());
     }
 
     private ItemModelBuilder generated(Supplier<? extends IItemProvider> item) {

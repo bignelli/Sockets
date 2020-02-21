@@ -1,3 +1,8 @@
-907174c7869fb477d73a6944dd8ef66d277c942f assets\sockets\lang\en_us.json
-ffbc9081d7c5ee7b9d4e2e980069226e469e71d0 assets\sockets\lang\pt_br.json
+570606e7b74f571b9bc4a3e885a1899f9f8e8658 assets\sockets\blockstates\socket_remover.json
+a2cbb9d415e8ff266c6cf3394eb680c0261ccba1 assets\sockets\lang\en_us.json
+9fdcb42c1196d8c54e532f207657b331e14d07aa assets\sockets\lang\pt_br.json
+2eeb44b15ea4c90099381e5af84d87aace9e4a4d assets\sockets\models\block\socket_remover.json
 542a62f6335c464a7d1150794c8f11096cb6d123 assets\sockets\models\item\diamond_gem.json
+40f9f09bc9c621f35c2a59f7869351c7f9688189 assets\sockets\models\item\emerald_gem.json
+69f5810819e6f82f599579aa3d2b3c63c0c7124e assets\sockets\models\item\enchantful_gem.json
+ead64fb0f2ea5ef77dddb54a36c9d8b34fbacc21 assets\sockets\models\item\socket_remover.json
