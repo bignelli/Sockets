@@ -83,6 +83,8 @@ public final class ClientForgeEventHandler {
             socket.ifPresent(s -> {
                 if (!ItemHandlerHelper.insertItem(s.getStackHandler(), copy, false).isEmpty()) {
                     holdingStack.grow(1); //should never reach this line.
+                } else {
+                    SocketsAPI.getGem(copy).ifPresent(g -> g.equipped(s, mc.player));
                 }
             });
         }

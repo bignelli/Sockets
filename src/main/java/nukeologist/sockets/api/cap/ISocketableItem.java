@@ -16,6 +16,7 @@
 
 package nukeologist.sockets.api.cap;
 
+import net.minecraft.item.ItemStack;
 import nukeologist.sockets.api.SocketStackHandler;
 
 /**
@@ -46,5 +47,13 @@ public interface ISocketableItem {
      * @return the {@link SocketStackHandler} 'inventory' handler.
      */
     SocketStackHandler getStackHandler();
+
+    /**
+     * Gets the ItemStack that holds this capability, unless it was attached to something else,
+     * or it was called by the default factory. In those cases, the ItemStack will be empty.
+     *
+     * @return the stack or else EMPTY
+     */
+    ItemStack getHolder();
 
 }

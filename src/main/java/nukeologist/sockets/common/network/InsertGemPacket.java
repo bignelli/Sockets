@@ -17,6 +17,7 @@
 package nukeologist.sockets.common.network;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.CraftingResultSlot;
 import net.minecraft.inventory.container.Slot;
@@ -70,7 +71,12 @@ public class InsertGemPacket {
                     if (!s.accepts(g)) return;
                     final ItemStack copy = gemStack.split(1);
                     if (ItemHandlerHelper.insertItem(s.getStackHandler(), copy, false).isEmpty()) {
-                        SocketsAPI.getGem(copy).ifPresent(gg -> gg.equipped(s, sender));
+                        SocketsAPI.getGem(copy).ifPresent(gg -> {
+                            for (final EquipmentSlotType equipSlot : EquipmentSlotType.values()) {
+                                gg.getGemAttributeModifiers(s, equipSlot).forEach((str, mod) -> socketStack.addAttributeModifier(str, mod, equipSlot));
+                            }
+                            gg.equipped(s, sender);
+                        });
                         slot.inventory.markDirty();
                     } else {
                         gemStack.grow(1);

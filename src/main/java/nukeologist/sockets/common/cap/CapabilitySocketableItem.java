@@ -16,6 +16,7 @@
 
 package nukeologist.sockets.common.cap;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
@@ -57,16 +58,24 @@ public final class CapabilitySocketableItem {
     public static class SocketWrapper implements ISocketableItem {
 
         private final SocketStackHandler handler;
+        private final ItemStack stack;
 
         private int size = 1;
 
         public SocketWrapper() {
             handler = new SocketStackHandler(this);
+            stack = ItemStack.EMPTY;
         }
 
-        public SocketWrapper(int size) {
+        public SocketWrapper(ItemStack stack) {
+            handler = new SocketStackHandler(this);
+            this.stack = stack;
+        }
+
+        public SocketWrapper(ItemStack stack, int size) {
             this.size = Math.min(size, 4);
             handler = new SocketStackHandler(this);
+            this.stack = stack;
         }
 
         @Override
@@ -78,14 +87,19 @@ public final class CapabilitySocketableItem {
         public SocketStackHandler getStackHandler() {
             return handler;
         }
+
+        @Override
+        public ItemStack getHolder() {
+            return stack;
+        }
     }
 
     public static ICapabilityProvider createProvider(ISocketableItem item) {
         return new Provider(item);
     }
 
-    public static ICapabilityProvider createProvider() {
-        return createProvider(new SocketWrapper());
+    public static ICapabilityProvider createProvider(ItemStack stack) {
+        return createProvider(new SocketWrapper(stack));
     }
 
     public static class Provider implements ICapabilitySerializable<INBT> {
@@ -97,6 +111,7 @@ public final class CapabilitySocketableItem {
             this.instance = item;
             this.socketableItem = LazyOptional.of(() -> item);
         }
+
 
         @Nonnull
         @Override

@@ -42,7 +42,7 @@ public enum CapabilityEventHandler {
         final Item item = stack.getItem();
         if ((item instanceof TieredItem && ((TieredItem) item).getTier() == ItemTier.DIAMOND)
                 || (item instanceof ArmorItem && ((ArmorItem) item).getArmorMaterial() == ArmorMaterial.DIAMOND))
-            event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider());
+            event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider(stack));
     }
 
     @SubscribeEvent

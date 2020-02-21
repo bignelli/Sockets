@@ -25,6 +25,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import nukeologist.sockets.api.SocketsAPI;
+import nukeologist.sockets.common.item.EnchantfulGemItem;
 import nukeologist.sockets.common.item.GemItem;
 
 import java.util.Comparator;
@@ -52,6 +53,7 @@ public final class SocketsItems {
     public static final RegistryObject<Item> DIAMOND_GEM = ITEMS.register("diamond_gem", () -> new GemItem(defaultGem()).onEquip(s -> System.out.println("Equipped!")));
     public static final RegistryObject<Item> SOCKET_REMOVER = ITEMS.register("socket_remover", () -> new BlockItem(SocketsBlocks.SOCKET_REMOVER.get(), defaultGem()));
     public static final RegistryObject<Item> EMERALD_GEM = ITEMS.register("emerald_gem", () -> new GemItem(defaultGem()));
+    public static final RegistryObject<Item> ENCHANTFUL_GEM = ITEMS.register("enchantful_gem", () -> new EnchantfulGemItem(defaultGem()));
 
     private static Item.Properties defaultGem() {
         return new Item.Properties()
