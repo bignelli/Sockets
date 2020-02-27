@@ -36,12 +36,18 @@ public class PortugueseProvider extends LanguageProvider {
     protected void addTranslations() {
         //blocks
         block(SocketsBlocks.SOCKET_REMOVER, "Removedor de Soquetes");
+        block(SocketsBlocks.RUBY_ORE, "Min\u00E9rio de Rubi");
+        block(SocketsBlocks.SAPPHIRE_ORE, "Min\u00E9rio de Safira");
 
         //items
         add(SocketsItems.DIAMOND_GEM, "Gema de Diamante");
-        //add(SocketsItems.SOCKET_REMOVER, "Removedor de Soquetes");
         add(SocketsItems.EMERALD_GEM, "Gema de Esmeralda");
         add(SocketsItems.ENCHANTFUL_GEM, "Gema Encant\u00E1vel");
+        add(SocketsItems.LAZULI_GEM, "Gema laz\u00FAli");
+        add(SocketsItems.RUBY, "Rubi");
+        add(SocketsItems.SAPPHIRE, "Safira");
+        add(SocketsItems.RUBY_GEM, "Gema de Rubi");
+        add(SocketsItems.SAPPHIRE_GEM, "Gema de Safira");
 
         add("itemGroup.sockets", "Soquetes");
     }

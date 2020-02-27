@@ -56,6 +56,13 @@ public final class SocketsItems {
     public static final RegistryObject<Item> SOCKET_REMOVER = ITEMS.register("socket_remover", () -> new BlockItem(SocketsBlocks.SOCKET_REMOVER.get(), defaultGem()));
     public static final RegistryObject<Item> EMERALD_GEM = ITEMS.register("emerald_gem", () -> new GemItem(defaultGem()).attributes(SocketsItems::getEmeraldModifier));
     public static final RegistryObject<Item> ENCHANTFUL_GEM = ITEMS.register("enchantful_gem", () -> new EnchantfulGemItem(defaultGem().maxStackSize(1).rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> LAZULI_GEM = ITEMS.register("lazuli_gem", () -> new GemItem(defaultGem()));
+    public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", () -> new Item(defaultGem()));
+    public static final RegistryObject<Item> SAPPHIRE = ITEMS.register("sapphire", () -> new Item(defaultGem()));
+    public static final RegistryObject<Item> RUBY_GEM = ITEMS.register("ruby_gem", () -> new GemItem(defaultGem()));
+    public static final RegistryObject<Item> SAPPHIRE_GEM = ITEMS.register("sapphire_gem", () -> new GemItem(defaultGem()));
+    public static final RegistryObject<Item> RUBY_ORE = ITEMS.register("ruby_ore", () -> new BlockItem(SocketsBlocks.RUBY_ORE.get(), defaultGem()));
+    public static final RegistryObject<Item> SAPPHIRE_ORE = ITEMS.register("sapphire_ore", () -> new BlockItem(SocketsBlocks.SAPPHIRE_ORE.get(), defaultGem()));
 
     private static Item.Properties defaultGem() {
         return new Item.Properties()

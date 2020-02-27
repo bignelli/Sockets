@@ -1,7 +1,14 @@
 {
+  "block.sockets.ruby_ore": "Ruby Ore",
+  "block.sockets.sapphire_ore": "Sapphire Ore",
   "block.sockets.socket_remover": "Socket Remover",
   "item.sockets.diamond_gem": "Diamond Gem",
   "item.sockets.emerald_gem": "Emerald Gem",
   "item.sockets.enchantful_gem": "Enchantful Gem",
+  "item.sockets.lazuli_gem": "Lazuli Gem",
+  "item.sockets.ruby": "Ruby",
+  "item.sockets.ruby_gem": "Ruby Gem",
+  "item.sockets.sapphire": "Sapphire",
+  "item.sockets.sapphire_gem": "Sapphire Gem",
   "itemGroup.sockets": "Sockets"
 }

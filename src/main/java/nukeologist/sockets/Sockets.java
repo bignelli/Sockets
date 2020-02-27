@@ -32,6 +32,7 @@ import nukeologist.sockets.common.registry.SocketsBlocks;
 import nukeologist.sockets.common.registry.SocketsContainers;
 import nukeologist.sockets.common.registry.SocketsItems;
 import nukeologist.sockets.common.registry.SocketsTileEntities;
+import nukeologist.sockets.common.world.SocketsWorldGen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
@@ -41,7 +42,8 @@ import org.apache.logging.log4j.MarkerManager;
 public final class Sockets {
 
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final Marker CORE = MarkerManager.getMarker("SOCKETS");
+
+    public static final Marker CORE = MarkerManager.getMarker("SOCKETS");
 
     public Sockets() {
         LOGGER.info(CORE, "Sockets mod initializing!");
@@ -63,7 +65,8 @@ public final class Sockets {
         CapabilitySocketableItem.register();
         CapabilityGemItem.register();
         DeferredWorkQueue.runLater(Network::register);
-        LOGGER.info(CORE, "Registered Capabilities and Network");
+        DeferredWorkQueue.runLater(SocketsWorldGen::setupOres);
+        LOGGER.info(CORE, "Registered Capabilities, Network and WorldGen");
     }
 
     public static ResourceLocation modLoc(final String path) {

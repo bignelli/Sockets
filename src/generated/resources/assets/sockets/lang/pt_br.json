@@ -1,7 +1,14 @@
 {
+  "block.sockets.ruby_ore": "Min\u00E9rio de Rubi",
+  "block.sockets.sapphire_ore": "Min\u00E9rio de Safira",
   "block.sockets.socket_remover": "Removedor de Soquetes",
   "item.sockets.diamond_gem": "Gema de Diamante",
   "item.sockets.emerald_gem": "Gema de Esmeralda",
   "item.sockets.enchantful_gem": "Gema Encant\u00E1vel",
+  "item.sockets.lazuli_gem": "Gema laz\u00FAli",
+  "item.sockets.ruby": "Rubi",
+  "item.sockets.ruby_gem": "Gema de Rubi",
+  "item.sockets.sapphire": "Safira",
+  "item.sockets.sapphire_gem": "Gema de Safira",
   "itemGroup.sockets": "Soquetes"
 }

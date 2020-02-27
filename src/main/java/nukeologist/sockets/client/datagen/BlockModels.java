@@ -34,10 +34,16 @@ public class BlockModels extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        horizontalBlock(SocketsBlocks.SOCKET_REMOVER, modLoc("block/socket_remover_side"), modLoc("block/socket_remover_front"), modLoc("block/socket_remover_top"));
+        horizontal(SocketsBlocks.SOCKET_REMOVER, modLoc("block/socket_remover_side"), modLoc("block/socket_remover_front"), modLoc("block/socket_remover_top"));
+        simple(SocketsBlocks.RUBY_ORE);
+        simple(SocketsBlocks.SAPPHIRE_ORE);
     }
 
-    private void horizontalBlock(Supplier<Block> block, ResourceLocation side, ResourceLocation front, ResourceLocation rest) {
+    private void horizontal(Supplier<Block> block, ResourceLocation side, ResourceLocation front, ResourceLocation rest) {
         horizontalBlock(block.get(), side, front, rest);
+    }
+
+    private void simple(Supplier<Block> block) {
+        simpleBlock(block.get());
     }
 }

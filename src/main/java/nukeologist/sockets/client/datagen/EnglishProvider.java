@@ -36,12 +36,18 @@ public class EnglishProvider extends LanguageProvider {
     protected void addTranslations() {
         //blocks
         block(SocketsBlocks.SOCKET_REMOVER, "Socket Remover");
+        block(SocketsBlocks.RUBY_ORE, "Ruby Ore");
+        block(SocketsBlocks.SAPPHIRE_ORE, "Sapphire Ore");
 
         //items
         add(SocketsItems.DIAMOND_GEM, "Diamond Gem");
-        //add(SocketsItems.SOCKET_REMOVER, "Socket Remover");
         add(SocketsItems.EMERALD_GEM, "Emerald Gem");
         add(SocketsItems.ENCHANTFUL_GEM, "Enchantful Gem");
+        add(SocketsItems.LAZULI_GEM, "Lazuli Gem");
+        add(SocketsItems.RUBY, "Ruby");
+        add(SocketsItems.SAPPHIRE, "Sapphire");
+        add(SocketsItems.RUBY_GEM, "Ruby Gem");
+        add(SocketsItems.SAPPHIRE_GEM, "Sapphire Gem");
 
         add("itemGroup.sockets", "Sockets");
     }

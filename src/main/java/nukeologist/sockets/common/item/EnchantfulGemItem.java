@@ -60,8 +60,18 @@ public class EnchantfulGemItem extends Item {
     }
 
     @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         return true;
+    }
+
+    @Override
+    public int getItemEnchantability() {
+        return 10;
     }
 
     private boolean containsThis(final SocketStackHandler handler) {
