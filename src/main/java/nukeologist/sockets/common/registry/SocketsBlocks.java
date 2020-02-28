@@ -35,6 +35,7 @@ public final class SocketsBlocks {
     private SocketsBlocks() {
     }
 
+    //Blocks in here shall be known to the loot table provider.
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, SocketsAPI.ID);
 
     public static final RegistryObject<Block> SOCKET_REMOVER = BLOCKS.register("socket_remover", () -> new SocketRemoverBlock(Block.Properties.create(Material.IRON)));

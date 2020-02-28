@@ -31,6 +31,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import nukeologist.sockets.common.registry.SocketsTileEntities;
 import nukeologist.sockets.common.tileentity.SocketRemoverTileEntity;
 
 public class SocketRemoverBlock extends Block {
@@ -49,7 +50,7 @@ public class SocketRemoverBlock extends Block {
 
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new SocketRemoverTileEntity();
+        return SocketsTileEntities.SOCKET_REMOVER.get().create();
     }
 
     @Override

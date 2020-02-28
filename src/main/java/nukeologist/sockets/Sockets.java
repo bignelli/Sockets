@@ -28,10 +28,7 @@ import nukeologist.sockets.common.cap.CapabilityEventHandler;
 import nukeologist.sockets.common.cap.CapabilityGemItem;
 import nukeologist.sockets.common.cap.CapabilitySocketableItem;
 import nukeologist.sockets.common.network.Network;
-import nukeologist.sockets.common.registry.SocketsBlocks;
-import nukeologist.sockets.common.registry.SocketsContainers;
-import nukeologist.sockets.common.registry.SocketsItems;
-import nukeologist.sockets.common.registry.SocketsTileEntities;
+import nukeologist.sockets.common.registry.*;
 import nukeologist.sockets.common.world.SocketsWorldGen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,12 +48,14 @@ public final class Sockets {
         modBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(CapabilityEventHandler.INSTANCE);
+        MinecraftForge.EVENT_BUS.addListener(SocketsItems::handleLootLevel);
 
         //Registry
         SocketsItems.ITEMS.register(modBus);
         SocketsBlocks.BLOCKS.register(modBus);
         SocketsTileEntities.TILES.register(modBus);
         SocketsContainers.CONTAINERS.register(modBus);
+        SocketsLootModifiers.MODIFIERS.register(modBus);
         LOGGER.info(CORE, "Subscribed all event handlers.");
     }
 

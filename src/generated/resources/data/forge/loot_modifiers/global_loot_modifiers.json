@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "entries": [
+    "sockets:smelting",
+    "sockets:fortune"
+  ]
+}

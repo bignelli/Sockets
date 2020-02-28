@@ -70,7 +70,7 @@ public interface IGem {
     }
 
     /**
-     * Called when this ItemStack was unequipped on a socket.
+     * Called after this ItemStack was unequipped on a socket.
      *
      * @param item   item with the socket.
      * @param entity entity with this in the inventory

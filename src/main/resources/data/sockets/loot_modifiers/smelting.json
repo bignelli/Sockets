@@ -1,0 +1,11 @@
+{
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "nbt": "{socketsSmelt:1b}"
+      }
+    }
+  ],
+  "function": "sockets:smelting"
+}

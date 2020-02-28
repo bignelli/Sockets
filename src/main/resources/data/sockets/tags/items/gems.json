@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "sockets:diamond_gem",
+    "sockets:emerald_gem",
+    "sockets:enchantful_gem",
+    "sockets:lazuli_gem",
+    "sockets:ruby_gem",
+    "sockets:sapphire_gem"
+  ]
+}

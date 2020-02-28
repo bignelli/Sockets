@@ -16,6 +16,7 @@
 
 package nukeologist.sockets.api;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.NonNullConsumer;
 import net.minecraftforge.items.ItemStackHandler;
@@ -55,6 +56,14 @@ public class SocketStackHandler extends ItemStackHandler {
             });
 
         }
+    }
+
+    public boolean hasItem(final Item item) {
+        for (final ItemStack stack : stacks) {
+            if (stack.getItem() == item)
+                return true;
+        }
+        return false;
     }
 
     @Override

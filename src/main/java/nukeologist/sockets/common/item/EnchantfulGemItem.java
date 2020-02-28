@@ -22,6 +22,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import nukeologist.sockets.api.SocketStackHandler;
 import nukeologist.sockets.api.cap.IGem;
@@ -29,6 +30,7 @@ import nukeologist.sockets.api.cap.ISocketableItem;
 import nukeologist.sockets.common.cap.CapabilityGemItem;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 
 public class EnchantfulGemItem extends Item {
 
@@ -51,7 +53,28 @@ public class EnchantfulGemItem extends Item {
                 if (holder.isEmpty()) return;
                 EnchantmentHelper.getEnchantments(stack).forEach(holder::addEnchantment); //maybe kinda OP?
             }
+
+            @Override
+            public void unequipped(ISocketableItem item, LivingEntity entity) {
+                final ItemStack holder = item.getHolder();
+                if (holder.isEmpty()) return;
+                final CompoundNBT tag = holder.getOrCreateTag();
+                if (tag.contains("Enchantments", 9)) {
+                    ListNBT listnbt = tag.getList("Enchantments", 10);
+                    listnbt.removeIf(n -> n instanceof CompoundNBT && isContainedEnchantment((CompoundNBT) n, stack));
+                }
+            }
         });
+    }
+
+    private boolean isContainedEnchantment(CompoundNBT nbt, ItemStack stack) {
+        final Map<Enchantment, Integer> enchants =  EnchantmentHelper.getEnchantments(stack);
+        for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
+            if (nbt.contains("id") && nbt.getString("id").equals(entry.getKey().getRegistryName().toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
