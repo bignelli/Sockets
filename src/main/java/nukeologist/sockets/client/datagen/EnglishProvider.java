@@ -39,6 +39,8 @@ public class EnglishProvider extends LanguageProvider {
         block(SocketsBlocks.SOCKET_REMOVER, "Socket Remover");
         block(SocketsBlocks.RUBY_ORE, "Ruby Ore");
         block(SocketsBlocks.SAPPHIRE_ORE, "Sapphire Ore");
+        block(SocketsBlocks.RUBY_BLOCK, "Block of Ruby");
+        block(SocketsBlocks.SAPPHIRE_BLOCK, "Block of Sapphire");
 
         //items
         add(SocketsItems.DIAMOND_GEM, "Diamond Gem");
@@ -59,7 +61,7 @@ public class EnglishProvider extends LanguageProvider {
         //Jei
         add(StringTranslations.DIAMOND_GEM_JEI, "Adds damage when socketed into a tool/weapon, adds toughness to armor.");
         add(StringTranslations.EMERALD_GEM_JEI, "Adds Luck.");
-        add(StringTranslations.ENCHANTFUL_GEM_JEI, "Adds the enchantments this gem has. Can't work with Anvils.");
+        add(StringTranslations.ENCHANTFUL_GEM_JEI, "Adds the enchantments this gem has. Can't work with Anvils. May be found in dungeons.");
         add(StringTranslations.LAZULI_GEM_JEI, "Adds fortune when socketed into a tool/weapon.");
         add(StringTranslations.RUBY_GEM_JEI, "Adds auto smelting when socketed into a tool.");
         add(StringTranslations.SAPPHIRE_GEM_JEI, "Adds looting when socketed into a tool/weapon.");

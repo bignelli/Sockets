@@ -34,5 +34,10 @@ public class BlockTagProvider extends BlockTagsProvider {
         getBuilder(Tags.Blocks.ORES).add(SocketsTags.Blocks.ORES_RUBY, SocketsTags.Blocks.ORES_SAPPHIRE);
         getBuilder(SocketsTags.Blocks.ORES_RUBY).add(SocketsBlocks.RUBY_ORE.get());
         getBuilder(SocketsTags.Blocks.ORES_SAPPHIRE).add(SocketsBlocks.SAPPHIRE_ORE.get());
+
+        //Storage Blocks
+        getBuilder(Tags.Blocks.STORAGE_BLOCKS).add(SocketsTags.Blocks.STORAGE_BLOCKS_RUBY, SocketsTags.Blocks.STORAGE_BLOCKS_SAPPHIRE);
+        getBuilder(SocketsTags.Blocks.STORAGE_BLOCKS_RUBY).add(SocketsBlocks.RUBY_BLOCK.get());
+        getBuilder(SocketsTags.Blocks.STORAGE_BLOCKS_SAPPHIRE).add(SocketsBlocks.SAPPHIRE_BLOCK.get());
     }
 }

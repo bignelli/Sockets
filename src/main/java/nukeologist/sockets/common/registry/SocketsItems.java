@@ -69,6 +69,8 @@ public final class SocketsItems {
     public static final RegistryObject<Item> SAPPHIRE_GEM = ITEMS.register("sapphire_gem", () -> new GemItem(defaultGem()));
     public static final RegistryObject<Item> RUBY_ORE = ITEMS.register("ruby_ore", () -> new BlockItem(SocketsBlocks.RUBY_ORE.get(), defaultGroup()));
     public static final RegistryObject<Item> SAPPHIRE_ORE = ITEMS.register("sapphire_ore", () -> new BlockItem(SocketsBlocks.SAPPHIRE_ORE.get(), defaultGroup()));
+    public static final RegistryObject<Item> RUBY_BLOCK = ITEMS.register("ruby_block", () -> new BlockItem(SocketsBlocks.RUBY_BLOCK.get(), defaultGroup()));
+    public static final RegistryObject<Item> SAPPHIRE_BLOCK = ITEMS.register("sapphire_block", () -> new BlockItem(SocketsBlocks.SAPPHIRE_BLOCK.get(), defaultGroup()));
 
     private static Item.Properties defaultGroup() {
         return new Item.Properties().group(SOCKETS_GROUP);

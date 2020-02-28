@@ -44,7 +44,6 @@ public class LootProvider extends LootTableProvider {
 
     private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> tables = ImmutableList.of(
             Pair.of(BlockTables::new, LootParameterSets.BLOCK)
-            //Pair.of(FishingLootTables::new, LootParameterSets.FISHING),
     );
 
     @Override
@@ -62,6 +61,8 @@ public class LootProvider extends LootTableProvider {
         @Override
         protected void addTables() {
             selfDrop(SocketsBlocks.SOCKET_REMOVER);
+            selfDrop(SocketsBlocks.RUBY_BLOCK);
+            selfDrop(SocketsBlocks.SAPPHIRE_BLOCK);
             fortune(SocketsBlocks.RUBY_ORE, SocketsItems.RUBY);
             fortune(SocketsBlocks.SAPPHIRE_ORE, SocketsItems.SAPPHIRE);
         }

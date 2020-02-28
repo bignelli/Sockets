@@ -39,6 +39,8 @@ public class PortugueseProvider extends LanguageProvider {
         block(SocketsBlocks.SOCKET_REMOVER, "Removedor de Soquetes");
         block(SocketsBlocks.RUBY_ORE, "Min\u00E9rio de Rubi");
         block(SocketsBlocks.SAPPHIRE_ORE, "Min\u00E9rio de Safira");
+        block(SocketsBlocks.RUBY_BLOCK, "Bloco de Rubi");
+        block(SocketsBlocks.SAPPHIRE_BLOCK, "Bloco de Safira");
 
         //items
         add(SocketsItems.DIAMOND_GEM, "Gema de Diamante");
@@ -59,7 +61,7 @@ public class PortugueseProvider extends LanguageProvider {
         //Jei
         add(StringTranslations.DIAMOND_GEM_JEI, "Adiciona dano quando dentro de ferramenta/arma. Adiciona Resist\u00EAncia \u00E0s armaduras.");
         add(StringTranslations.EMERALD_GEM_JEI, "Adiciona Sorte.");
-        add(StringTranslations.ENCHANTFUL_GEM_JEI, "Adiciona os encantamentos que essa gema tem. N\u00E3o funciona com Bigornas.");
+        add(StringTranslations.ENCHANTFUL_GEM_JEI, "Adiciona os encantamentos que essa gema tem. N\u00E3o funciona com Bigornas. Pode ser encontrada em calabou\u00E7os.");
         add(StringTranslations.LAZULI_GEM_JEI, "Adiciona fortuna quando dentro de ferramenta/arma.");
         add(StringTranslations.RUBY_GEM_JEI, "Adiciona autocozimento quando dentro de ferramenta.");
         add(StringTranslations.SAPPHIRE_GEM_JEI, "Adiciona saque quando dentro de ferramenta/arma.");

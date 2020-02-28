@@ -40,6 +40,11 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(SocketsTags.Blocks.ORES_RUBY, SocketsTags.Items.ORES_RUBY);
         copy(SocketsTags.Blocks.ORES_SAPPHIRE, SocketsTags.Items.ORES_SAPPHIRE);
 
+        //StorageBlocks
+        getBuilder(Tags.Items.STORAGE_BLOCKS).add(SocketsTags.Items.STORAGE_BLOCKS_RUBY, SocketsTags.Items.STORAGE_BLOCKS_SAPPHIRE);
+        copy(SocketsTags.Blocks.STORAGE_BLOCKS_RUBY, SocketsTags.Items.STORAGE_BLOCKS_RUBY);
+        copy(SocketsTags.Blocks.STORAGE_BLOCKS_SAPPHIRE, SocketsTags.Items.STORAGE_BLOCKS_SAPPHIRE);
+
         //Forge Gems
         getBuilder(Tags.Items.GEMS).add(SocketsTags.Items.GEMS_RUBY, SocketsTags.Items.GEMS_SAPPHIRE);
         getBuilder(SocketsTags.Items.GEMS_RUBY).add(SocketsItems.RUBY.get());

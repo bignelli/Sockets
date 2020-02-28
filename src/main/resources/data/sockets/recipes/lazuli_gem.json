@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#@#",
+    "@#@",
+    "#@#"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:storage_blocks/lapis"
+    },
+    "@": {
+      "tag": "forge:gems/lapis"
+    }
+  },
+  "result": {
+    "item": "sockets:lazuli_gem"
+  }
+}

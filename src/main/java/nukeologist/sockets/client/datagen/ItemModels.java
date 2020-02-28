@@ -51,6 +51,8 @@ public class ItemModels extends ItemModelProvider {
         itemBlock(SocketsBlocks.SOCKET_REMOVER);
         itemBlock(SocketsBlocks.RUBY_ORE);
         itemBlock(SocketsBlocks.SAPPHIRE_ORE);
+        itemBlock(SocketsBlocks.RUBY_BLOCK);
+        itemBlock(SocketsBlocks.SAPPHIRE_BLOCK);
     }
 
     private void itemBlock(final Block block) {

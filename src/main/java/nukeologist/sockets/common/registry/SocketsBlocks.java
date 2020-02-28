@@ -42,6 +42,8 @@ public final class SocketsBlocks {
     public static final RegistryObject<Block> SOCKET_REMOVER = BLOCKS.register("socket_remover", () -> new SocketRemoverBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> RUBY_ORE = BLOCKS.register("ruby_ore", () -> new GemOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.0F).harvestLevel(2)).exp(SocketsBlocks::xp));
     public static final RegistryObject<Block> SAPPHIRE_ORE = BLOCKS.register("sapphire_ore", () -> new GemOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.0F).harvestLevel(2)).exp(SocketsBlocks::xp));
+    public static final RegistryObject<Block> RUBY_BLOCK = BLOCKS.register("ruby_block", () -> new Block(Block.Properties.create(Material.IRON).harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.0F).harvestLevel(2)));
+    public static final RegistryObject<Block> SAPPHIRE_BLOCK = BLOCKS.register("sapphire_block", () -> new Block(Block.Properties.create(Material.IRON).harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.0F).harvestLevel(2)));
 
     //Used by the ore blocks
     private static final int xp(final Random random) {

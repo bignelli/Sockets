@@ -48,6 +48,7 @@ public final class ClientModEventHandler {
             gen.addProvider(new ItemTagProvider(gen));
             gen.addProvider(new LootProvider(gen));
             gen.addProvider(new LootModifierProvider(gen));
+            gen.addProvider(new Recipes(gen));
         }
     }
 

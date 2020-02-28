@@ -21,6 +21,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import nukeologist.sockets.api.SocketsAPI;
+import nukeologist.sockets.common.loot.DungeonModifier;
 import nukeologist.sockets.common.loot.FortuneModifier;
 import nukeologist.sockets.common.loot.SmeltingModifier;
 
@@ -33,4 +34,5 @@ public final class SocketsLootModifiers {
 
     public static final RegistryObject<GlobalLootModifierSerializer<?>> SMELT = MODIFIERS.register("smelting", SmeltingModifier.Serializer::new);
     public static final RegistryObject<GlobalLootModifierSerializer<?>> FORTUNE = MODIFIERS.register("fortune", FortuneModifier.Serializer::new);
+    public static final RegistryObject<GlobalLootModifierSerializer<?>> ENCHANTFUL = MODIFIERS.register("enchantful", DungeonModifier.Serializer::new);
 }

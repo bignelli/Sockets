@@ -37,6 +37,8 @@ public class BlockModels extends BlockStateProvider {
         horizontal(SocketsBlocks.SOCKET_REMOVER, modLoc("block/socket_remover_side"), modLoc("block/socket_remover_front"), modLoc("block/socket_remover_top"));
         simple(SocketsBlocks.RUBY_ORE);
         simple(SocketsBlocks.SAPPHIRE_ORE);
+        simple(SocketsBlocks.RUBY_BLOCK);
+        simple(SocketsBlocks.SAPPHIRE_BLOCK);
     }
 
     private void horizontal(Supplier<Block> block, ResourceLocation side, ResourceLocation front, ResourceLocation rest) {

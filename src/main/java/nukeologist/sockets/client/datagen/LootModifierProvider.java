@@ -54,7 +54,7 @@ public class LootModifierProvider implements IDataProvider {
     }
 
     protected void addLootModifiers() {
-        modifiers = GlobalLootModifiers.of(modLoc("smelting").toString(), modLoc("fortune").toString());
+        modifiers = GlobalLootModifiers.of(modLoc("smelting").toString(), modLoc("fortune").toString(), modLoc("enchantful").toString());
     }
 
     protected ResourceLocation modLoc(final String path) {
@@ -65,8 +65,9 @@ public class LootModifierProvider implements IDataProvider {
     public void act(DirectoryCache cache) throws IOException {
         addLootModifiers();
         if (modifiers != null) save(cache, modifiers, this.gen.getOutputFolder().resolve("data/forge/loot_modifiers/global_loot_modifiers.json"));
-        save(cache, new ModifierTest("sockets:smelting", "{socketsSmelt:1b}"), this.gen.getOutputFolder().resolve("data/" + modid + "/loot_modifiers/smelting.json"));
-        save(cache, new ModifierTest("sockets:fortune", "{socketsFortune:1b}"), this.gen.getOutputFolder().resolve("data/" + modid + "/loot_modifiers/fortune.json"));
+        save(cache, new ModifierTest("sockets:smelting", "{socketsSmelt:1b}", "minecraft:match_tool"), this.gen.getOutputFolder().resolve("data/" + modid + "/loot_modifiers/smelting.json"));
+        save(cache, new ModifierTest("sockets:fortune", "{socketsFortune:1b}", "minecraft:match_tool"), this.gen.getOutputFolder().resolve("data/" + modid + "/loot_modifiers/fortune.json"));
+        save(cache, new ModifierTest2("sockets:enchantful", "minecraft:chest", "minecraft:location_check"), this.gen.getOutputFolder().resolve("data/" + modid + "/loot_modifiers/enchantful.json"));
     }
 
     /*Copy from LanguageProvider */
@@ -105,9 +106,9 @@ public class LootModifierProvider implements IDataProvider {
     //TEMPORARY, WIP
     protected static class ModifierTest {
 
-        private ModifierTest(String function, String nbt) {
+        private ModifierTest(String function, String nbt, String condition) {
             this.function = function;
-            this.conditions = Collections.singletonList(new Condition(nbt));
+            this.conditions = Collections.singletonList(new Condition(nbt, condition));
         }
 
         private List<Condition> conditions;
@@ -115,10 +116,11 @@ public class LootModifierProvider implements IDataProvider {
 
         private static class Condition {
 
-            private Condition(String nbt) {
+            private Condition(String nbt, String condition) {
                 predicate = new Predicate(nbt);
+                this.condition = condition;
             }
-            private String condition = "minecraft:match_tool";
+            private String condition;
             private Predicate predicate;
         }
 
@@ -129,5 +131,43 @@ public class LootModifierProvider implements IDataProvider {
             }
             private final String nbt;
         }
+    }
+
+    protected static class ModifierTest2 {
+
+        private ModifierTest2(String function, String block, String condition) {
+            this.function = function;
+            this.conditions = Collections.singletonList(new ModifierTest2.Condition(block, condition));
+        }
+
+        private List<ModifierTest2.Condition> conditions;
+        private String function;
+
+        private static class Condition {
+
+            private Condition(String block, String condition) {
+                this.condition = condition;
+                this.predicate = new Predicate(block);
+            }
+            private String condition;
+            private ModifierTest2.Predicate predicate;
+
+        }
+
+        private static class Predicate {
+
+            private Dummy block;
+            private Predicate(String block) {
+                this.block = new Dummy(block);
+            }
+        }
+
+        private static class Dummy {
+            private String block;
+            private Dummy(String block) {
+                this.block = block;
+            }
+        }
+
     }
 }

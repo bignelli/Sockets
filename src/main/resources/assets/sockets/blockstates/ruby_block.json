@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "sockets:block/ruby_block"
+    }
+  }
+}

@@ -24,6 +24,10 @@ import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import nukeologist.sockets.Sockets;
 
+/**
+ * Holder class for all Socket's tags. For now, not used anywhere but in datagen.
+ * That may change in the future.
+ */
 public final class SocketsTags {
 
     private SocketsTags() {
@@ -33,6 +37,8 @@ public final class SocketsTags {
 
         public static final Tag<Block> ORES_RUBY = forge("ores/ruby");
         public static final Tag<Block> ORES_SAPPHIRE = forge("ores/sapphire");
+        public static final Tag<Block> STORAGE_BLOCKS_RUBY = forge("storage_blocks/ruby");
+        public static final Tag<Block> STORAGE_BLOCKS_SAPPHIRE = forge("storage_blocks/sapphire");
 
         private static Tag<Block> forge(final String s) {
             return new BlockTags.Wrapper(new ResourceLocation("forge", s));
@@ -45,6 +51,8 @@ public final class SocketsTags {
         public static final Tag<Item> ORES_SAPPHIRE = forge("ores/sapphire");
         public static final Tag<Item> GEMS_RUBY = forge("gems/ruby");
         public static final Tag<Item> GEMS_SAPPHIRE = forge("gems/sapphire");
+        public static final Tag<Item> STORAGE_BLOCKS_RUBY = forge("storage_blocks/ruby");
+        public static final Tag<Item> STORAGE_BLOCKS_SAPPHIRE = forge("storage_blocks/sapphire");
 
         public static final Tag<Item> GEMS = tag("gems");
 

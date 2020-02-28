@@ -16,12 +16,16 @@
 
 package nukeologist.sockets.common.network;
 
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.CraftingResultSlot;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.TieredItem;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.NetworkEvent;
@@ -73,7 +77,7 @@ public class InsertGemPacket {
                     if (ItemHandlerHelper.insertItem(s.getStackHandler(), copy, false).isEmpty()) {
                         SocketsAPI.getGem(copy).ifPresent(gg -> {
                             for (final EquipmentSlotType equipSlot : EquipmentSlotType.values()) {
-                                gg.getGemAttributeModifiers(s, equipSlot).forEach((str, mod) -> socketStack.addAttributeModifier(str, mod, equipSlot));
+                                gg.getGemAttributeModifiers(s, equipSlot).forEach((str, mod) -> addModifier(socketStack, str, mod, equipSlot));
                             }
                             gg.equipped(s, sender);
                         });
@@ -93,6 +97,21 @@ public class InsertGemPacket {
                 return slots.get(slot);
             }
             return null;
+        }
+
+        private static void addModifier(final ItemStack stack, final String str, final AttributeModifier mod, final EquipmentSlotType equipSlot) {
+            final Item item = stack.getItem();
+            if (item instanceof TieredItem) {
+                if (equipSlot == EquipmentSlotType.MAINHAND || equipSlot == EquipmentSlotType.OFFHAND) {
+                    stack.addAttributeModifier(str, mod, equipSlot);
+                }
+            } else if (item instanceof ArmorItem) {
+                if (((ArmorItem) item).getEquipmentSlot() == equipSlot) {
+                    stack.addAttributeModifier(str, mod, equipSlot);
+                }
+            } else {
+                stack.addAttributeModifier(str, mod, equipSlot);
+            }
         }
     }
 }

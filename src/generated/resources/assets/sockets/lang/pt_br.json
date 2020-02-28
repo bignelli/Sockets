@@ -1,10 +1,12 @@
 {
+  "block.sockets.ruby_block": "Bloco de Rubi",
   "block.sockets.ruby_ore": "Min\u00E9rio de Rubi",
+  "block.sockets.sapphire_block": "Bloco de Safira",
   "block.sockets.sapphire_ore": "Min\u00E9rio de Safira",
   "block.sockets.socket_remover": "Removedor de Soquetes",
   "info.sockets.jei.diamond_gem": "Adiciona dano quando dentro de ferramenta/arma. Adiciona Resist\u00EAncia \u00E0s armaduras.",
   "info.sockets.jei.emerald_gem": "Adiciona Sorte.",
-  "info.sockets.jei.enchantful_gem": "Adiciona os encantamentos que essa gema tem. N\u00E3o funciona com Bigornas.",
+  "info.sockets.jei.enchantful_gem": "Adiciona os encantamentos que essa gema tem. N\u00E3o funciona com Bigornas. Pode ser encontrada em calabou\u00E7os.",
   "info.sockets.jei.lazuli_gem": "Adiciona fortuna quando dentro de ferramenta/arma.",
   "info.sockets.jei.ruby_gem": "Adiciona autocozimento quando dentro de ferramenta.",
   "info.sockets.jei.sapphire_gem": "Adiciona saque quando dentro de ferramenta/arma.",
