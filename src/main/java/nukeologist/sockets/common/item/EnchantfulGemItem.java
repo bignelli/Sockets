@@ -16,6 +16,7 @@
 
 package nukeologist.sockets.common.item;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
@@ -23,13 +24,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import nukeologist.sockets.api.SocketStackHandler;
 import nukeologist.sockets.api.cap.IGem;
 import nukeologist.sockets.api.cap.ISocketableItem;
 import nukeologist.sockets.common.cap.CapabilityGemItem;
+import nukeologist.sockets.common.util.StringTranslations;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class EnchantfulGemItem extends Item {
@@ -64,7 +74,18 @@ public class EnchantfulGemItem extends Item {
                     listnbt.removeIf(n -> n instanceof CompoundNBT && isContainedEnchantment((CompoundNBT) n, stack));
                 }
             }
+
+            @Override
+            public List<ITextComponent> getExtraTooltip() {
+                return Collections.singletonList(new TranslationTextComponent(StringTranslations.ENCHANTFUL_EXTRA_TOOLTIP).applyTextStyle(TextFormatting.GREEN));
+            }
         });
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT) //Avoid OnlyIn as much as possible, though this method is an exception.
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(new TranslationTextComponent(StringTranslations.ENCHANTFUL_TOOLTIP).applyTextStyle(TextFormatting.GREEN));
     }
 
     private boolean isContainedEnchantment(CompoundNBT nbt, ItemStack stack) {

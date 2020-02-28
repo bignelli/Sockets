@@ -1,8 +1,8 @@
 6102cfa7eac9020611619c3e71256edea3a9c8d7 assets\sockets\blockstates\ruby_ore.json
 ad9c616c845aec0a4f72c2f53150b26477c56d8c assets\sockets\blockstates\sapphire_ore.json
 570606e7b74f571b9bc4a3e885a1899f9f8e8658 assets\sockets\blockstates\socket_remover.json
-d20a6c08e0c8cc672d7e222050f719836a8f2185 assets\sockets\lang\en_us.json
-c04000ba0b9e40f6acf7e127c434a90bdd8b322d assets\sockets\lang\pt_br.json
+cc99e53a79d84b48e091f2dd0c8de830a5d992fb assets\sockets\lang\en_us.json
+b306f93c323775c0554312e939ff3bf1236f29a8 assets\sockets\lang\pt_br.json
 f7c99bbc4745a9cbadd455bc166e269f3f3e4f55 assets\sockets\models\block\ruby_ore.json
 66531d905ed827d8a0758edc1ef6ed1ec09741a5 assets\sockets\models\block\sapphire_ore.json
 2eeb44b15ea4c90099381e5af84d87aace9e4a4d assets\sockets\models\block\socket_remover.json
@@ -21,6 +21,9 @@ ead64fb0f2ea5ef77dddb54a36c9d8b34fbacc21 assets\sockets\models\item\socket_remov
 86f1c318aa448693704fa927f290cd59dd7dffb9 data\forge\tags\blocks\ores.json
 4c1d8981ce9e0195a1caa976f72e82a861d79266 data\forge\tags\blocks\ores\ruby.json
 42f619fe3e7abfc7b143507c05b55098622f7f44 data\forge\tags\blocks\ores\sapphire.json
+aae65e7180a9f48096bf9bd489d3ca297ea55cc1 data\forge\tags\items\gems.json
+66f8b4fef08fd607e38b54a1db20305e4d0b3228 data\forge\tags\items\gems\ruby.json
+62bafe5db3759585814b3d182514e158d6fc7e5d data\forge\tags\items\gems\sapphire.json
 4c1d8981ce9e0195a1caa976f72e82a861d79266 data\forge\tags\items\ores\ruby.json
 42f619fe3e7abfc7b143507c05b55098622f7f44 data\forge\tags\items\ores\sapphire.json
 7f0cc18e7019dd5ceb3e218c431c099272e066bb data\sockets\loot_modifiers\fortune.json

@@ -43,6 +43,8 @@ public final class SocketsTags {
 
         public static final Tag<Item> ORES_RUBY = forge("ores/ruby");
         public static final Tag<Item> ORES_SAPPHIRE = forge("ores/sapphire");
+        public static final Tag<Item> GEMS_RUBY = forge("gems/ruby");
+        public static final Tag<Item> GEMS_SAPPHIRE = forge("gems/sapphire");
 
         public static final Tag<Item> GEMS = tag("gems");
 

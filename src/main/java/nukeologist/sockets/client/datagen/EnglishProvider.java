@@ -23,6 +23,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import nukeologist.sockets.api.SocketsAPI;
 import nukeologist.sockets.common.registry.SocketsBlocks;
 import nukeologist.sockets.common.registry.SocketsItems;
+import nukeologist.sockets.common.util.StringTranslations;
 
 import java.util.function.Supplier;
 
@@ -50,6 +51,18 @@ public class EnglishProvider extends LanguageProvider {
         add(SocketsItems.SAPPHIRE_GEM, "Sapphire Gem");
 
         add("itemGroup.sockets", "Sockets");
+
+        add(StringTranslations.ENCHANTFUL_TOOLTIP, "Enchant this Gem and it's socket shall be as well.");
+        add(StringTranslations.ENCHANTFUL_EXTRA_TOOLTIP, "Enchanted by Enchantful Gem");
+        add(StringTranslations.DEFAULT_GEM_EXTRA_TOOLTIP, "Contains Gems: ");
+
+        //Jei
+        add(StringTranslations.DIAMOND_GEM_JEI, "Adds damage when socketed into a tool/weapon, adds toughness to armor.");
+        add(StringTranslations.EMERALD_GEM_JEI, "Adds Luck.");
+        add(StringTranslations.ENCHANTFUL_GEM_JEI, "Adds the enchantments this gem has. Can't work with Anvils.");
+        add(StringTranslations.LAZULI_GEM_JEI, "Adds fortune when socketed into a tool/weapon.");
+        add(StringTranslations.RUBY_GEM_JEI, "Adds auto smelting when socketed into a tool.");
+        add(StringTranslations.SAPPHIRE_GEM_JEI, "Adds looting when socketed into a tool/weapon.");
     }
 
     private void add(final Supplier<Item> item, final String name) {

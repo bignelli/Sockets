@@ -19,6 +19,7 @@ package nukeologist.sockets.client.datagen;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.RegistryObject;
 import nukeologist.sockets.common.registry.SocketsItems;
 import nukeologist.sockets.common.registry.SocketsTags;
@@ -35,8 +36,14 @@ public class ItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void registerTags() {
+        //ores
         copy(SocketsTags.Blocks.ORES_RUBY, SocketsTags.Items.ORES_RUBY);
         copy(SocketsTags.Blocks.ORES_SAPPHIRE, SocketsTags.Items.ORES_SAPPHIRE);
+
+        //Forge Gems
+        getBuilder(Tags.Items.GEMS).add(SocketsTags.Items.GEMS_RUBY, SocketsTags.Items.GEMS_SAPPHIRE);
+        getBuilder(SocketsTags.Items.GEMS_RUBY).add(SocketsItems.RUBY.get());
+        getBuilder(SocketsTags.Items.GEMS_SAPPHIRE).add(SocketsItems.SAPPHIRE.get());
 
         getBuilder(SocketsTags.Items.GEMS).add(getGems());
     }

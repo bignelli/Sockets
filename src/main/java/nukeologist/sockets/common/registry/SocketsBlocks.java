@@ -20,6 +20,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.OreBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -38,9 +39,9 @@ public final class SocketsBlocks {
     //Blocks in here shall be known to the loot table provider.
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, SocketsAPI.ID);
 
-    public static final RegistryObject<Block> SOCKET_REMOVER = BLOCKS.register("socket_remover", () -> new SocketRemoverBlock(Block.Properties.create(Material.IRON)));
-    public static final RegistryObject<Block> RUBY_ORE = BLOCKS.register("ruby_ore", () -> new GemOreBlock(Block.Properties.create(Material.ROCK)).exp(SocketsBlocks::xp));
-    public static final RegistryObject<Block> SAPPHIRE_ORE = BLOCKS.register("sapphire_ore", () -> new GemOreBlock(Block.Properties.create(Material.ROCK)).exp(SocketsBlocks::xp));
+    public static final RegistryObject<Block> SOCKET_REMOVER = BLOCKS.register("socket_remover", () -> new SocketRemoverBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F).harvestTool(ToolType.PICKAXE)));
+    public static final RegistryObject<Block> RUBY_ORE = BLOCKS.register("ruby_ore", () -> new GemOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.0F).harvestLevel(2)).exp(SocketsBlocks::xp));
+    public static final RegistryObject<Block> SAPPHIRE_ORE = BLOCKS.register("sapphire_ore", () -> new GemOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.0F).harvestLevel(2)).exp(SocketsBlocks::xp));
 
     //Used by the ore blocks
     private static final int xp(final Random random) {

@@ -71,8 +71,7 @@ public final class SocketsItems {
     public static final RegistryObject<Item> SAPPHIRE_ORE = ITEMS.register("sapphire_ore", () -> new BlockItem(SocketsBlocks.SAPPHIRE_ORE.get(), defaultGroup()));
 
     private static Item.Properties defaultGroup() {
-        return new Item.Properties()
-                .group(SOCKETS_GROUP);
+        return new Item.Properties().group(SOCKETS_GROUP);
     }
 
     private static Item.Properties defaultGem() {

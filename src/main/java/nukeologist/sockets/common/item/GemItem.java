@@ -24,15 +24,22 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import nukeologist.sockets.api.cap.IGem;
 import nukeologist.sockets.api.cap.ISocketableItem;
 import nukeologist.sockets.common.cap.CapabilityGemItem;
+import nukeologist.sockets.common.util.StringTranslations;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class GemItem extends Item {
 
@@ -46,6 +53,7 @@ public class GemItem extends Item {
     private Consumer<ISocketableItem> unequip;
     private Consumer<ISocketableItem> tick;
     private Function<EquipmentSlotType, Multimap<String, AttributeModifier>> modifier;
+    private Supplier<List<ITextComponent>> components;
 
     public GemItem canEquip(final Predicate<ISocketableItem> canEquip) {
         this.canEquip = canEquip;
@@ -77,6 +85,11 @@ public class GemItem extends Item {
         return this;
     }
 
+    public GemItem components(final Supplier<List<ITextComponent>> components) {
+        this.components = components;
+        return this;
+    }
+
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
         return CapabilityGemItem.createProvider(new IGem() {
@@ -100,6 +113,14 @@ public class GemItem extends Item {
             @Override
             public void unequipped(ISocketableItem item, LivingEntity entity) {
                 if (unequip != null) unequip.accept(item);
+            }
+
+            @Override
+            public List<ITextComponent> getExtraTooltip() {
+                return components == null ?
+                        Collections.singletonList(new TranslationTextComponent(StringTranslations.DEFAULT_GEM_EXTRA_TOOLTIP).applyTextStyle(TextFormatting.GOLD)
+                        .appendSibling(new TranslationTextComponent(stack.getTranslationKey())))
+                        : components.get();
             }
 
             @Override

@@ -17,6 +17,7 @@ ext {
     FORGE_VERSION = '31.1.18'
     MY_VERSION = '0.0.0'
     MODID = 'sockets'
+    JEI_VERSION = '6.0.0.2'
 }
 
 version = "${MC_VERSION}-${MY_VERSION}"
@@ -81,8 +82,24 @@ minecraft {
     }
 }
 
+repositories {
+    maven {
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        url "http://tehnut.info/maven"
+    }
+    mavenLocal()
+}
+
+
 dependencies {
     minecraft "net.minecraftforge:forge:${MC_VERSION}-${FORGE_VERSION}"
+
+    // compile against the JEI API but do not include it at runtime
+    compileOnly fg.deobf("mezz.jei:jei-${MC_VERSION}:${JEI_VERSION}:api")
+    // at runtime, use the full JEI jar
+    runtimeOnly fg.deobf("mezz.jei:jei-${MC_VERSION}:${JEI_VERSION}")
 
 }
 

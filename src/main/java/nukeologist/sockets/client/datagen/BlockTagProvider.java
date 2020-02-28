@@ -30,6 +30,7 @@ public class BlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void registerTags() {
+        //Ores
         getBuilder(Tags.Blocks.ORES).add(SocketsTags.Blocks.ORES_RUBY, SocketsTags.Blocks.ORES_SAPPHIRE);
         getBuilder(SocketsTags.Blocks.ORES_RUBY).add(SocketsBlocks.RUBY_ORE.get());
         getBuilder(SocketsTags.Blocks.ORES_SAPPHIRE).add(SocketsBlocks.SAPPHIRE_ORE.get());

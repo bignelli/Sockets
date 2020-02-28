@@ -2,6 +2,12 @@
   "block.sockets.ruby_ore": "Ruby Ore",
   "block.sockets.sapphire_ore": "Sapphire Ore",
   "block.sockets.socket_remover": "Socket Remover",
+  "info.sockets.jei.diamond_gem": "Adds damage when socketed into a tool/weapon, adds toughness to armor.",
+  "info.sockets.jei.emerald_gem": "Adds Luck.",
+  "info.sockets.jei.enchantful_gem": "Adds the enchantments this gem has. Can't work with Anvils.",
+  "info.sockets.jei.lazuli_gem": "Adds fortune when socketed into a tool/weapon.",
+  "info.sockets.jei.ruby_gem": "Adds auto smelting when socketed into a tool.",
+  "info.sockets.jei.sapphire_gem": "Adds looting when socketed into a tool/weapon.",
   "item.sockets.diamond_gem": "Diamond Gem",
   "item.sockets.emerald_gem": "Emerald Gem",
   "item.sockets.enchantful_gem": "Enchantful Gem",
@@ -10,5 +16,8 @@
   "item.sockets.ruby_gem": "Ruby Gem",
   "item.sockets.sapphire": "Sapphire",
   "item.sockets.sapphire_gem": "Sapphire Gem",
-  "itemGroup.sockets": "Sockets"
+  "itemGroup.sockets": "Sockets",
+  "tooltip.sockets.enchantful_gem": "Enchant this Gem and it's socket shall be as well.",
+  "tooltip.sockets.extra.default": "Contains Gems: ",
+  "tooltip.sockets.extra.enchantful_gem": "Enchanted by Enchantful Gem"
 }

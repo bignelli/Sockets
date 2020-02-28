@@ -23,6 +23,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import nukeologist.sockets.api.SocketsAPI;
 import nukeologist.sockets.common.registry.SocketsBlocks;
 import nukeologist.sockets.common.registry.SocketsItems;
+import nukeologist.sockets.common.util.StringTranslations;
 
 import java.util.function.Supplier;
 
@@ -50,6 +51,18 @@ public class PortugueseProvider extends LanguageProvider {
         add(SocketsItems.SAPPHIRE_GEM, "Gema de Safira");
 
         add("itemGroup.sockets", "Soquetes");
+
+        add(StringTranslations.ENCHANTFUL_TOOLTIP, "Encante esta Gema e seu soquete tamb\u00E9m ser\u00E1.");
+        add(StringTranslations.ENCHANTFUL_EXTRA_TOOLTIP, "Encantado pela Gema Encant\u00E1vel");
+        add(StringTranslations.DEFAULT_GEM_EXTRA_TOOLTIP, "Gemas Contidas: ");
+
+        //Jei
+        add(StringTranslations.DIAMOND_GEM_JEI, "Adiciona dano quando dentro de ferramenta/arma. Adiciona Resist\u00EAncia \u00E0s armaduras.");
+        add(StringTranslations.EMERALD_GEM_JEI, "Adiciona Sorte.");
+        add(StringTranslations.ENCHANTFUL_GEM_JEI, "Adiciona os encantamentos que essa gema tem. N\u00E3o funciona com Bigornas.");
+        add(StringTranslations.LAZULI_GEM_JEI, "Adiciona fortuna quando dentro de ferramenta/arma.");
+        add(StringTranslations.RUBY_GEM_JEI, "Adiciona autocozimento quando dentro de ferramenta.");
+        add(StringTranslations.SAPPHIRE_GEM_JEI, "Adiciona saque quando dentro de ferramenta/arma.");
     }
 
     private void add(final Supplier<Item> item, final String name) {
