@@ -45,10 +45,13 @@ public final class Sockets {
     public Sockets() {
         LOGGER.info(CORE, "Sockets mod initializing!");
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        final IEventBus forgeBus =  MinecraftForge.EVENT_BUS;
         modBus.addListener(this::commonSetup);
 
-        MinecraftForge.EVENT_BUS.register(CapabilityEventHandler.INSTANCE);
-        MinecraftForge.EVENT_BUS.addListener(SocketsItems::handleLootLevel);
+        forgeBus.register(CapabilityEventHandler.INSTANCE);
+        forgeBus.addListener(SocketsItems::handleLootLevel);
+        forgeBus.addListener(SocketsItems::onHurtEvent);
+        forgeBus.addListener(SocketsItems::onBreakEvent);
 
         //Registry
         SocketsItems.ITEMS.register(modBus);

@@ -42,6 +42,8 @@ public class EnglishProvider extends LanguageProvider {
         block(SocketsBlocks.RUBY_BLOCK, "Block of Ruby");
         block(SocketsBlocks.SAPPHIRE_BLOCK, "Block of Sapphire");
 
+        add(StringTranslations.SOCKET_REMOVER_BUTTON, "Remove");
+
         //items
         add(SocketsItems.DIAMOND_GEM, "Diamond Gem");
         add(SocketsItems.EMERALD_GEM, "Emerald Gem");
@@ -59,8 +61,8 @@ public class EnglishProvider extends LanguageProvider {
         add(StringTranslations.DEFAULT_GEM_EXTRA_TOOLTIP, "Contains Gems: ");
 
         //Jei
-        add(StringTranslations.DIAMOND_GEM_JEI, "Adds damage when socketed into a tool/weapon, adds toughness to armor.");
-        add(StringTranslations.EMERALD_GEM_JEI, "Adds Luck.");
+        add(StringTranslations.DIAMOND_GEM_JEI, "Adds damage when socketed into a tool/weapon. Resists some damage in armor.");
+        add(StringTranslations.EMERALD_GEM_JEI, "Adds extra xp to block drops when socketed into a tool/weapon.");
         add(StringTranslations.ENCHANTFUL_GEM_JEI, "Adds the enchantments this gem has. Can't work with Anvils. May be found in dungeons.");
         add(StringTranslations.LAZULI_GEM_JEI, "Adds fortune when socketed into a tool/weapon.");
         add(StringTranslations.RUBY_GEM_JEI, "Adds auto smelting when socketed into a tool.");

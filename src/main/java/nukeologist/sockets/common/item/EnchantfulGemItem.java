@@ -38,6 +38,7 @@ import nukeologist.sockets.common.cap.CapabilityGemItem;
 import nukeologist.sockets.common.util.StringTranslations;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +72,8 @@ public class EnchantfulGemItem extends Item {
                 final CompoundNBT tag = holder.getOrCreateTag();
                 if (tag.contains("Enchantments", 9)) {
                     ListNBT listnbt = tag.getList("Enchantments", 10);
-                    listnbt.removeIf(n -> n instanceof CompoundNBT && isContainedEnchantment((CompoundNBT) n, stack));
+                    final List<String> enchants = new ArrayList<>();
+                    listnbt.removeIf(n -> n instanceof CompoundNBT && isContainedEnchantment((CompoundNBT) n, stack, enchants));
                 }
             }
 
@@ -88,10 +90,12 @@ public class EnchantfulGemItem extends Item {
         tooltip.add(new TranslationTextComponent(StringTranslations.ENCHANTFUL_TOOLTIP).applyTextStyle(TextFormatting.GREEN));
     }
 
-    private boolean isContainedEnchantment(CompoundNBT nbt, ItemStack stack) {
-        final Map<Enchantment, Integer> enchants =  EnchantmentHelper.getEnchantments(stack);
+    private boolean isContainedEnchantment(final CompoundNBT nbt, final ItemStack stack, final List<String> ench) {
+        final Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(stack);
         for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
-            if (nbt.contains("id") && nbt.getString("id").equals(entry.getKey().getRegistryName().toString())) {
+            final String id = nbt.getString("id");
+            if (nbt.contains("id") && id.equals(entry.getKey().getRegistryName().toString()) && !ench.contains(id)) {
+                ench.add(id);
                 return true;
             }
         }

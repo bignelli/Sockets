@@ -42,6 +42,8 @@ public class PortugueseProvider extends LanguageProvider {
         block(SocketsBlocks.RUBY_BLOCK, "Bloco de Rubi");
         block(SocketsBlocks.SAPPHIRE_BLOCK, "Bloco de Safira");
 
+        add(StringTranslations.SOCKET_REMOVER_BUTTON, "Remover");
+
         //items
         add(SocketsItems.DIAMOND_GEM, "Gema de Diamante");
         add(SocketsItems.EMERALD_GEM, "Gema de Esmeralda");
@@ -59,8 +61,8 @@ public class PortugueseProvider extends LanguageProvider {
         add(StringTranslations.DEFAULT_GEM_EXTRA_TOOLTIP, "Gemas Contidas: ");
 
         //Jei
-        add(StringTranslations.DIAMOND_GEM_JEI, "Adiciona dano quando dentro de ferramenta/arma. Adiciona Resist\u00EAncia \u00E0s armaduras.");
-        add(StringTranslations.EMERALD_GEM_JEI, "Adiciona Sorte.");
+        add(StringTranslations.DIAMOND_GEM_JEI, "Adiciona dano quando dentro de ferramenta/arma. Reduz danos quando em armaduras.");
+        add(StringTranslations.EMERALD_GEM_JEI, "Adiciona mais experi\u00EAncia a blocos minerados quando dentro de ferramenta/arma.");
         add(StringTranslations.ENCHANTFUL_GEM_JEI, "Adiciona os encantamentos que essa gema tem. N\u00E3o funciona com Bigornas. Pode ser encontrada em calabou\u00E7os.");
         add(StringTranslations.LAZULI_GEM_JEI, "Adiciona fortuna quando dentro de ferramenta/arma.");
         add(StringTranslations.RUBY_GEM_JEI, "Adiciona autocozimento quando dentro de ferramenta.");

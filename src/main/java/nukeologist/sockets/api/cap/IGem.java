@@ -16,12 +16,8 @@
 
 package nukeologist.sockets.api.cap;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
@@ -47,7 +43,7 @@ public interface IGem {
     }
 
     /**
-     * Determines if this ItemStack can be unequipped from a socket.
+     * Determines if this ItemStack can be unequipped from a socket. Called on client and server.
      *
      * @param item   item with the socket
      * @param entity entity with this in the inventory
@@ -70,7 +66,7 @@ public interface IGem {
     }
 
     /**
-     * Called after this ItemStack was unequipped on a socket.
+     * Called after this ItemStack was unequipped on a socket, on client and server.
      *
      * @param item   item with the socket.
      * @param entity entity with this in the inventory
@@ -91,15 +87,13 @@ public interface IGem {
     }
 
     /**
-     * A map of AttributeModifier used by the socket when this gem enters it, similar to the item version.
-     * Called before {@link IGem#equipped(ISocketableItem, LivingEntity)} and ONLY on the server.
+     * Called on the Socket Remover before {@link IGem#canUnequipOn(ISocketableItem, LivingEntity)}
      *
-     * @param item          item with the socket
-     * @param equipmentSlot slot which applies the modifier
-     * @return a map of the attribute modifiers
+     * @param item item with the socket
+     * @return xp needed for removal of this socket.
      */
-    default Multimap<String, AttributeModifier> getGemAttributeModifiers(ISocketableItem item, EquipmentSlotType equipmentSlot) {
-        return HashMultimap.create();
+    default int xpForRemoval(ISocketableItem item) {
+        return 0;
     }
 
     /**

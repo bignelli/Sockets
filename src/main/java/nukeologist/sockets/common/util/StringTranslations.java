@@ -16,7 +16,7 @@
 
 package nukeologist.sockets.common.util;
 
-//Helper class that holds all translations keys for Sockets.
+//Helper class that holds all extra translations keys for Sockets.
 public final class StringTranslations {
 
     private StringTranslations() {
@@ -36,4 +36,7 @@ public final class StringTranslations {
     public static final String LAZULI_GEM_JEI = "info.sockets.jei.lazuli_gem";
     public static final String RUBY_GEM_JEI = "info.sockets.jei.ruby_gem";
     public static final String SAPPHIRE_GEM_JEI = "info.sockets.jei.sapphire_gem";
+
+    //SocketRemover
+    public static final String SOCKET_REMOVER_BUTTON = "button.sockets.socket_remover1";
 }

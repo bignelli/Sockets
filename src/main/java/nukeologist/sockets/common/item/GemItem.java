@@ -16,11 +16,7 @@
 
 package nukeologist.sockets.common.item;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -37,7 +33,6 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -52,7 +47,6 @@ public class GemItem extends Item {
     private Consumer<ISocketableItem> equip;
     private Consumer<ISocketableItem> unequip;
     private Consumer<ISocketableItem> tick;
-    private Function<EquipmentSlotType, Multimap<String, AttributeModifier>> modifier;
     private Supplier<List<ITextComponent>> components;
 
     public GemItem canEquip(final Predicate<ISocketableItem> canEquip) {
@@ -77,11 +71,6 @@ public class GemItem extends Item {
 
     public GemItem tick(final Consumer<ISocketableItem> tick) {
         this.tick = tick;
-        return this;
-    }
-
-    public GemItem attributes(final Function<EquipmentSlotType, Multimap<String, AttributeModifier>> modifier) {
-        this.modifier = modifier;
         return this;
     }
 
@@ -119,20 +108,13 @@ public class GemItem extends Item {
             public List<ITextComponent> getExtraTooltip() {
                 return components == null ?
                         Collections.singletonList(new TranslationTextComponent(StringTranslations.DEFAULT_GEM_EXTRA_TOOLTIP).applyTextStyle(TextFormatting.GOLD)
-                        .appendSibling(new TranslationTextComponent(stack.getTranslationKey())))
+                                .appendSibling(new TranslationTextComponent(stack.getTranslationKey())))
                         : components.get();
             }
 
             @Override
             public void socketTick(ISocketableItem item, LivingEntity entity) {
                 if (tick != null) tick.accept(item);
-            }
-
-            @Override
-            public Multimap<String, AttributeModifier> getGemAttributeModifiers(ISocketableItem item, EquipmentSlotType equipmentSlot) {
-                if (modifier != null) return modifier.apply(equipmentSlot);
-                final Multimap<String, AttributeModifier> map = HashMultimap.create();
-                return map;
             }
         });
     }

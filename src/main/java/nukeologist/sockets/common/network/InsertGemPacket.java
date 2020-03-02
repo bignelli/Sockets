@@ -76,9 +76,6 @@ public class InsertGemPacket {
                     final ItemStack copy = gemStack.split(1);
                     if (ItemHandlerHelper.insertItem(s.getStackHandler(), copy, false).isEmpty()) {
                         SocketsAPI.getGem(copy).ifPresent(gg -> {
-                            for (final EquipmentSlotType equipSlot : EquipmentSlotType.values()) {
-                                gg.getGemAttributeModifiers(s, equipSlot).forEach((str, mod) -> addModifier(socketStack, str, mod, equipSlot));
-                            }
                             gg.equipped(s, sender);
                         });
                         slot.inventory.markDirty();
@@ -97,21 +94,6 @@ public class InsertGemPacket {
                 return slots.get(slot);
             }
             return null;
-        }
-
-        private static void addModifier(final ItemStack stack, final String str, final AttributeModifier mod, final EquipmentSlotType equipSlot) {
-            final Item item = stack.getItem();
-            if (item instanceof TieredItem) {
-                if (equipSlot == EquipmentSlotType.MAINHAND || equipSlot == EquipmentSlotType.OFFHAND) {
-                    stack.addAttributeModifier(str, mod, equipSlot);
-                }
-            } else if (item instanceof ArmorItem) {
-                if (((ArmorItem) item).getEquipmentSlot() == equipSlot) {
-                    stack.addAttributeModifier(str, mod, equipSlot);
-                }
-            } else {
-                stack.addAttributeModifier(str, mod, equipSlot);
-            }
         }
     }
 }

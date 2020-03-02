@@ -18,11 +18,21 @@ package nukeologist.sockets.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import nukeologist.sockets.Sockets;
+import nukeologist.sockets.api.SocketStackHandler;
+import nukeologist.sockets.api.SocketsAPI;
+import nukeologist.sockets.api.cap.IGem;
 import nukeologist.sockets.common.container.SocketRemoverContainer;
+import nukeologist.sockets.common.network.Network;
+import nukeologist.sockets.common.network.RemoveSocketPacket;
+import nukeologist.sockets.common.tileentity.SocketRemoverTileEntity;
+import nukeologist.sockets.common.util.StringTranslations;
 
 public class SocketRemoverScreen extends ContainerScreen<SocketRemoverContainer> {
 
@@ -37,6 +47,35 @@ public class SocketRemoverScreen extends ContainerScreen<SocketRemoverContainer>
         this.renderBackground();
         super.render(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        this.addButton(new Button(this.guiLeft + 20, this.guiTop + 10, 64, 20, I18n.format(StringTranslations.SOCKET_REMOVER_BUTTON), this::requestRemoval));
+    }
+
+    private void requestRemoval(final Button button) {
+        Network.CHANNEL.sendToServer(new RemoveSocketPacket(this.container.pos.getX(), this.container.pos.getY(), this.container.pos.getZ()));
+        final ItemStack stack = container.getSlot(0).getStack();
+        if (stack.isEmpty()) return;
+        SocketsAPI.getSockets(stack).ifPresent(socket -> {
+            final SocketStackHandler handler = socket.getStackHandler();
+            final IGem[] gems = new IGem[handler.getSlots()];
+            for (int i = 0; i < handler.getSlots(); i++) {
+                gems[i] = SocketsAPI.getGem(handler.getStackInSlot(i)).orElse(null);
+            }
+            if (SocketRemoverTileEntity.allGemsAccept(gems, socket, this.minecraft.player)) {
+                final int slots = handler.getSlots();
+                for (int i = 1; i < 5 && i - 1 < slots; i++) {
+                    final ItemStack gem = handler.getStackInSlot(i - 1);
+                    if (!gem.isEmpty()) {
+                        handler.setStackInSlot(i - 1, ItemStack.EMPTY);
+                        SocketsAPI.getGem(gem).ifPresent(g -> g.unequipped(socket, this.minecraft.player));
+                    }
+                }
+            }
+        });
     }
 
     @Override

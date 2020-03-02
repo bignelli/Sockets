@@ -39,6 +39,8 @@ public class SocketRemoverContainer extends Container {
 
     private final SocketRemoverTileEntity te;
 
+    public final BlockPos pos;
+
     public SocketRemoverContainer(int windowId, PlayerInventory playerInv, PacketBuffer extraData) {
         this(windowId, playerInv, extraData.readBlockPos());
     }
@@ -51,6 +53,7 @@ public class SocketRemoverContainer extends Container {
         super(type, windowId);
         final TileEntity tile = playerInv.player.world.getTileEntity(pos);
         this.te = tile instanceof SocketRemoverTileEntity ? (SocketRemoverTileEntity) tile : null;
+        this.pos = pos;
 
         final IItemHandler wrapper = new InvWrapper(playerInv);
 
@@ -83,7 +86,7 @@ public class SocketRemoverContainer extends Container {
 
     }
 
-    private SlotItemHandler createOutput(IItemHandler handler, int index, int x, int y) {
+    private SlotItemHandler createOutput(final IItemHandler handler, final int index, final int x, final int y) {
         return new SlotItemHandler(handler, index, x, y) {
             @Override
             public boolean isItemValid(@Nonnull ItemStack stack) {

@@ -18,6 +18,7 @@ package nukeologist.sockets.common.tileentity;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
@@ -33,7 +34,10 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RangedWrapper;
+import nukeologist.sockets.api.SocketStackHandler;
 import nukeologist.sockets.api.SocketsAPI;
+import nukeologist.sockets.api.cap.IGem;
+import nukeologist.sockets.api.cap.ISocketableItem;
 import nukeologist.sockets.common.container.SocketRemoverContainer;
 import nukeologist.sockets.common.registry.SocketsTileEntities;
 
@@ -92,6 +96,68 @@ public class SocketRemoverTileEntity extends TileEntity implements INamedContain
                 return stack;
             }
         };
+    }
+
+    public void tryAndRemove(ServerPlayerEntity player) {
+        final ItemStack input = inv.getStackInSlot(0);
+        if (input.isEmpty()) return;
+        final LazyOptional<ISocketableItem> possible = SocketsAPI.getSockets(input);
+        if (!possible.isPresent()) return;
+        final ISocketableItem socket = possible.orElseThrow(IllegalStateException::new);
+        final SocketStackHandler handler = socket.getStackHandler();
+        if (!acceptsRemoval(handler)) return;
+        final IGem[] gems = new IGem[handler.getSlots()];
+        int xp = 0;
+        for (int i = 0; i < handler.getSlots(); i++) {
+            gems[i] = SocketsAPI.getGem(handler.getStackInSlot(i)).orElse(null);
+        }
+        for (final IGem gem : gems) {
+            if (gem != null) {
+                xp += gem.xpForRemoval(socket);
+            }
+        }
+        if (xp > 0) {
+            if (player.experienceTotal >= xp && allGemsAccept(gems, socket, player)) {
+                player.addExperienceLevel(-xp);
+                removeSockets(handler, socket, player);
+            }
+        } else {
+            if (allGemsAccept(gems, socket, player))
+                removeSockets(handler, socket, player);
+        }
+    }
+
+    private void removeSockets(final SocketStackHandler handler, final ISocketableItem item, final ServerPlayerEntity player) {
+        final int slots = handler.getSlots();
+        for (int i = 1; i < 5 && i - 1 < slots; i++) {
+            final ItemStack gem = handler.getStackInSlot(i - 1);
+            if (!gem.isEmpty()) {
+                inv.setStackInSlot(i, gem);
+                handler.setStackInSlot(i - 1, ItemStack.EMPTY);
+                SocketsAPI.getGem(gem).ifPresent(g -> g.unequipped(item, player));
+            }
+        }
+    }
+
+    public static boolean allGemsAccept(final IGem[] gems, final ISocketableItem item, final PlayerEntity player) {
+        for (final IGem gem : gems) {
+            if (gem != null && !gem.canUnequipOn(item, player)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean acceptsRemoval(final SocketStackHandler handler) {
+        final int slots = handler.getSlots();
+        for (int i = 1; i < 5 && i - 1 < slots; i++) {
+            if (!handler.getStackInSlot(i - 1).isEmpty()) {
+                if (!inv.getStackInSlot(i).isEmpty()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override

@@ -44,6 +44,7 @@ public class Network {
         message(InsertGemPacket.class, InsertGemPacket::encode, InsertGemPacket::decode, InsertGemPacket.Handler::handle);
         message(SyncSocketPacket.class, SyncSocketPacket::encode, SyncSocketPacket::decode, SyncSocketPacket.Handler::handle);
         message(BulkSyncSocketPacket.class, BulkSyncSocketPacket::encode, BulkSyncSocketPacket::decode, BulkSyncSocketPacket.Handler::handle);
+        message(RemoveSocketPacket.class, RemoveSocketPacket::encode, RemoveSocketPacket::decode, RemoveSocketPacket.Handler::handle);
     }
 
     private static <C> void message(final Class<C> clazz, final BiConsumer<C, PacketBuffer> encoder, final Function<PacketBuffer, C> decoder, final BiConsumer<C, Supplier<NetworkEvent.Context>> consumer) {
