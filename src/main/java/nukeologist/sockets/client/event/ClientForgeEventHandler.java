@@ -22,6 +22,7 @@ import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.screen.inventory.CreativeScreen;
 import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -33,12 +34,15 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import nukeologist.sockets.Sockets;
 import nukeologist.sockets.api.SocketStackHandler;
 import nukeologist.sockets.api.SocketsAPI;
 import nukeologist.sockets.api.cap.IGem;
 import nukeologist.sockets.api.cap.ISocketableItem;
+import nukeologist.sockets.common.network.CreativeInsertGemPacket;
 import nukeologist.sockets.common.network.InsertGemPacket;
 import nukeologist.sockets.common.network.Network;
 
@@ -73,7 +77,8 @@ public final class ClientForgeEventHandler {
         final boolean accepts = gem.map(g -> socket.map(s -> s.accepts(g)).orElse(false)).orElse(false);
         final boolean canInsert = gem.map(g -> socket.map(s -> ItemHandlerHelper.insertItem(s.getStackHandler(), copyStack, true).isEmpty()).orElse(false)).orElse(false);
         if (accepts && canInsert) {
-            if (!(event.getGui() instanceof CreativeScreen)) {
+            final boolean creative = event.getGui() instanceof CreativeScreen;
+            if (!creative) {
                 //do not even bother sending if it is the creative menu, as the slotnumber is plain wrong on the server.
                 Network.CHANNEL.sendToServer(new InsertGemPacket(slot.slotNumber));
             }
@@ -85,9 +90,21 @@ public final class ClientForgeEventHandler {
                     holdingStack.grow(1); //should never reach this line.
                 } else {
                     SocketsAPI.getGem(copy).ifPresent(g -> g.equipped(s, mc.player));
+                    if (creative) { //what a special bunny
+                        Network.CHANNEL.sendToServer(new CreativeInsertGemPacket(copy, getRealSlot(slot.getStack(), mc.player)));
+                    }
                 }
             });
         }
+    }
+
+    private static int getRealSlot(final ItemStack stack, final PlayerEntity player) { //Used only for creative fellas
+        final IItemHandler h = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(IllegalStateException::new);
+        for (int i = 0; i < h.getSlots(); i++) {
+            final ItemStack possible = h.getStackInSlot(i);
+            if (possible == stack) return i;
+        }
+        return -1;
     }
 
     private static boolean checkEvent(GuiScreenEvent.MouseInputEvent event) {

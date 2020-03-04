@@ -53,6 +53,7 @@ public class RemoveSocketPacket {
                 final TileEntity te = player.world.getTileEntity(pos);
                 if (te instanceof SocketRemoverTileEntity) ((SocketRemoverTileEntity) te).tryAndRemove(player);
             });
+            ctx.get().setPacketHandled(true);
         }
     }
 }

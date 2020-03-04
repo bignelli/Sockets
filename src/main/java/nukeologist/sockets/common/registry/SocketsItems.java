@@ -34,7 +34,6 @@ import nukeologist.sockets.common.item.EnchantfulGemItem;
 import nukeologist.sockets.common.item.GemItem;
 
 import java.util.Comparator;
-import java.util.UUID;
 import java.util.stream.IntStream;
 
 public final class SocketsItems {
