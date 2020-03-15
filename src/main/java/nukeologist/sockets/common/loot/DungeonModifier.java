@@ -23,6 +23,7 @@ import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
+import nukeologist.sockets.common.config.Config;
 import nukeologist.sockets.common.registry.SocketsItems;
 
 import java.util.List;
@@ -33,11 +34,8 @@ public class DungeonModifier extends LootModifier {
         super(conditionsIn);
     }
 
-    //maybe move this to config?
-    public static final int CHANCE = 50;
-
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-        if (context.getRandom().nextInt(100) < CHANCE) {
+        if (context.getRandom().nextInt(100) < Config.SERVER.dungeonEnchantfulChance.get()) {
             generatedLoot.add(new ItemStack(SocketsItems.ENCHANTFUL_GEM.get()));
         }
         return generatedLoot;

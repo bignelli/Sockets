@@ -24,6 +24,7 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.BiomeDictionary;
+import nukeologist.sockets.common.config.Config;
 import nukeologist.sockets.common.registry.SocketsBlocks;
 
 public final class SocketsWorldGen {
@@ -37,11 +38,15 @@ public final class SocketsWorldGen {
             .withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 0, 60, 100)));
 
     public static void setupOres() {
-        BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER).forEach(SocketsWorldGen::addOres);
+        final boolean ruby = Config.SERVER.enableRubyGen.get();
+        final boolean sapphire = Config.SERVER.enableSapphireGen.get();
+        BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER).forEach(b -> addOres(b, ruby, sapphire));
     }
 
-    private static void addOres(final Biome biome) {
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, RUBY_FEATURE);
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SAPPHIRE_FEATURE);
+    private static void addOres(final Biome biome, final boolean ruby, final boolean sapphire) {
+        if (ruby)
+            biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, RUBY_FEATURE);
+        if (sapphire)
+            biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SAPPHIRE_FEATURE);
     }
 }

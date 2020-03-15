@@ -10,7 +10,7 @@ displayName="Sockets" #mandatory
 #logoFile="examplemod.png" #optional
 credits="Thanks for Forge being awesome." #optional
 authors="Nukeologist/Lord_Archimonde" #optional
-description='''Fun and games!'''
+description='''Fun and games!  Adds Gems and makes some items have sockets that you may put gems inside, similar to some ARPGS.'''
 [[dependencies.sockets]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory

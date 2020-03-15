@@ -19,6 +19,7 @@ package nukeologist.sockets.client.datagen;
 import net.minecraft.block.Block;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.tags.Tag;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
@@ -46,6 +47,8 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
         defaultGem(SocketsItems.LAZULI_GEM, Tags.Items.STORAGE_BLOCKS_LAPIS, Tags.Items.GEMS_LAPIS, "has_lapis", consumer);
         defaultGem(SocketsItems.RUBY_GEM, SocketsTags.Items.STORAGE_BLOCKS_RUBY, SocketsTags.Items.GEMS_RUBY, "has_ruby", consumer);
         defaultGem(SocketsItems.SAPPHIRE_GEM, SocketsTags.Items.STORAGE_BLOCKS_SAPPHIRE, SocketsTags.Items.GEMS_SAPPHIRE, "has_sapphire", consumer);
+
+        ShapedRecipeBuilder.shapedRecipe(SocketsBlocks.SOCKET_REMOVER.get()).key('#', SocketsTags.Items.GEMS).key('@', Items.ANVIL).patternLine("###").patternLine("#@#").patternLine("###").addCriterion("has_anvil", hasItem(Items.ANVIL)).build(consumer);
     }
 
     private void compactBlock(final Supplier<Block> block, final Tag<Item> itemTag, final Tag<Item> blockTag, final Supplier<Item> reverse, final String itemCriterion, final String blockCriterion, final Consumer<IFinishedRecipe> consumer) {

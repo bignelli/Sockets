@@ -98,15 +98,6 @@ public final class ClientForgeEventHandler {
         }
     }
 
-    private static int getRealSlot(final ItemStack stack, final PlayerEntity player) { //Used only for creative fellas
-        final IItemHandler h = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(IllegalStateException::new);
-        for (int i = 0; i < h.getSlots(); i++) {
-            final ItemStack possible = h.getStackInSlot(i);
-            if (possible == stack) return i;
-        }
-        return -1;
-    }
-
     private static boolean checkEvent(GuiScreenEvent.MouseInputEvent event) {
         if (!(event.getGui() instanceof ContainerScreen)) return true;
         final Minecraft mc = event.getGui().getMinecraft();
@@ -123,6 +114,15 @@ public final class ClientForgeEventHandler {
         final LazyOptional<IGem> gem = SocketsAPI.getGem(holdingStack);
         if (!gem.isPresent()) return true;
         return false;
+    }
+
+    private static int getRealSlot(final ItemStack stack, final PlayerEntity player) {
+        final IItemHandler h = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(IllegalStateException::new);
+        for (int i = 0; i < h.getSlots(); i++) {
+            final ItemStack possible = h.getStackInSlot(i);
+            if (possible == stack || ItemStack.areItemStacksEqual(possible, stack)) return i;
+        }
+        return -1;
     }
 
     @SubscribeEvent

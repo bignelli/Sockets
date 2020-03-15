@@ -108,9 +108,10 @@ public class Network {
             }
             i++;
             for (int j = i; j < ver.length; j++) {
-                if (ver[j] == '.') return Integer.parseInt(builder.toString());
                 builder.append(ver[j]);
             }
+            final String patch = builder.toString();
+            if (!patch.isEmpty()) return Integer.parseInt(patch);
             return -1;
         }
     }

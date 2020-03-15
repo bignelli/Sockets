@@ -47,6 +47,7 @@ e3891a8438a8d155b7480f71a126c53aff641fb9 data\sockets\advancements\recipes\socke
 65e4b47b18c86f01f5183c0da040b452aa6e4456 data\sockets\advancements\recipes\sockets\sapphire.json
 620f7cab53896c606fb7391567869ab7d5fb3036 data\sockets\advancements\recipes\sockets\sapphire_block.json
 dc75349ee200fa41d5d5ca4d2bbedba8e3124643 data\sockets\advancements\recipes\sockets\sapphire_gem.json
+1e3e9c40e8776ae95078006367184654d76588ed data\sockets\advancements\recipes\sockets\socket_remover.json
 7470e152a1782b86fe8afa889d394e83e464c458 data\sockets\loot_modifiers\enchantful.json
 7f0cc18e7019dd5ceb3e218c431c099272e066bb data\sockets\loot_modifiers\fortune.json
 a1f3fb4a0495400a85b44946f420e8ad92b9f16e data\sockets\loot_modifiers\smelting.json
@@ -64,4 +65,5 @@ e603da55c3f5bd53f504d329075c2a041a4994d9 data\sockets\recipes\ruby_gem.json
 438ac03889257a95e77b284162623ba8939e41b5 data\sockets\recipes\sapphire.json
 f916b0f9fd1ac9125dbceecf4d3f9af263a12369 data\sockets\recipes\sapphire_block.json
 b84600ff83a361bebc2d422e2a3d1b03b4fc2c71 data\sockets\recipes\sapphire_gem.json
+b86f64af3e52a7132f4dde30e1f60aa7ce33f732 data\sockets\recipes\socket_remover.json
 f5406582d4f9c69db614069184be99d353c5dbe2 data\sockets\tags\items\gems.json

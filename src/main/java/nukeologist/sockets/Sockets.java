@@ -20,13 +20,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import nukeologist.sockets.api.SocketsAPI;
 import nukeologist.sockets.common.cap.CapabilityEventHandler;
 import nukeologist.sockets.common.cap.CapabilityGemItem;
 import nukeologist.sockets.common.cap.CapabilitySocketableItem;
+import nukeologist.sockets.common.config.Config;
 import nukeologist.sockets.common.network.Network;
 import nukeologist.sockets.common.registry.*;
 import nukeologist.sockets.common.world.SocketsWorldGen;
@@ -44,14 +47,17 @@ public final class Sockets {
 
     public Sockets() {
         LOGGER.info(CORE, "Sockets mod initializing!");
+        final ModLoadingContext context = ModLoadingContext.get();
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-        final IEventBus forgeBus =  MinecraftForge.EVENT_BUS;
+        final IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         modBus.addListener(this::commonSetup);
 
         forgeBus.register(CapabilityEventHandler.INSTANCE);
         forgeBus.addListener(SocketsItems::handleLootLevel);
         forgeBus.addListener(SocketsItems::onHurtEvent);
         forgeBus.addListener(SocketsItems::onBreakEvent);
+
+        context.registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
 
         //Registry
         SocketsItems.ITEMS.register(modBus);
