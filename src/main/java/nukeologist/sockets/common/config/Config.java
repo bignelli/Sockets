@@ -16,13 +16,19 @@
 
 package nukeologist.sockets.common.config;
 
+import com.google.common.collect.Lists;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
 
 public final class Config {
 
     public static final ServerConfig SERVER;
     public static final ForgeConfigSpec SERVER_SPEC;
+
+    private static final String[] defaultSockets = {"minecraft:diamond_sword=1", "minecraft:diamond_shovel=1", "minecraft:diamond_pickaxe=1", "minecraft:diamond_axe=1", "minecraft:diamond_hoe=1",
+    "minecraft:diamond_helmet=1", "minecraft:diamond_chestplate=1", "minecraft:diamond_leggings=1", "minecraft:diamond_boots=1"};
 
     static {
         final Pair<ServerConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(ServerConfig::new);
@@ -36,6 +42,8 @@ public final class Config {
         public final ForgeConfigSpec.BooleanValue enableSapphireGen;
 
         public final ForgeConfigSpec.IntValue dungeonEnchantfulChance;
+
+        public final ForgeConfigSpec.ConfigValue<List<? extends String>> socketsItems;
 
         ServerConfig(ForgeConfigSpec.Builder builder) {
             builder.push("Sockets Configuration Options");
@@ -52,6 +60,11 @@ public final class Config {
             dungeonEnchantfulChance = builder
                     .comment("Chance that an Enchantful Gem spawns in a Dungeon Chest")
                     .defineInRange("dungeonEnchantfulChance", 50, 0, 100);
+
+            socketsItems = builder
+                    .comment("A Map of registrykey=int pairs. Adds the int value as the number of sockets to a given item (with a max of 4 sockets.)" + "\n" +
+                            "WARNING: removing an item from this will remove all Gems it had.")
+                    .defineList("socketString2IntMap", Lists.newArrayList(defaultSockets), o -> o instanceof String);
         }
     }
 }

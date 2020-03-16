@@ -99,7 +99,11 @@ public final class CapabilitySocketableItem {
     }
 
     public static ICapabilityProvider createProvider(ItemStack stack) {
-        return createProvider(new SocketWrapper(stack));
+        return createProvider(stack, 1);
+    }
+
+    public static ICapabilityProvider createProvider(ItemStack stack, int size) {
+        return createProvider(new SocketWrapper(stack, size));
     }
 
     public static class Provider implements ICapabilitySerializable<INBT> {
