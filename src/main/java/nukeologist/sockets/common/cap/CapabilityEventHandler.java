@@ -52,6 +52,7 @@ public enum CapabilityEventHandler {
     public void attachCap(AttachCapabilitiesEvent<ItemStack> event) {
         final ItemStack stack = event.getObject();
         if (stack.isEmpty()) return;
+        if (stack.getMaxStackSize() != 1) return;
         final Item item = stack.getItem();
         final int value = capItems.getValue().getInt(item.getRegistryName().toString());
         if (value != 0)
@@ -67,10 +68,10 @@ public enum CapabilityEventHandler {
             int value;
             try {
                 value = Integer.parseInt(pair[1]);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 value = 1;
-                LOGGER.warn(CORE, "Failed to parse config value for \"{}\", setting it's number of sockets to 1", pair[0]);
-                LOGGER.error(CORE, "Exception: ", e);
+                LOGGER.warn(CORE, "Failed to parse config value for \"{}\", setting its number of sockets to 1", pair[0]);
+                LOGGER.error(CORE, "Cause: ", e);
             }
             map.putIfAbsent(pair[0], Math.max(Math.min(4, value), 1));
         }

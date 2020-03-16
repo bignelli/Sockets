@@ -63,7 +63,7 @@ public final class Config {
 
             socketsItems = builder
                     .comment("A Map of registrykey=int pairs. Adds the int value as the number of sockets to a given item (with a max of 4 sockets.)" + "\n" +
-                            "WARNING: removing an item from this will remove all Gems it had.")
+                            "WARNING: removing an item from this will remove all Gems it had. The item MUST also be not stackable.")
                     .defineList("socketString2IntMap", Lists.newArrayList(defaultSockets), o -> o instanceof String);
         }
     }
