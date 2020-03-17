@@ -31,7 +31,7 @@ public final class SocketsWorldGen {
 
     private SocketsWorldGen() {
     }
-
+    //Height is calculated by: random.nextInt(maxHeight - topOffset) + bottomOffset
     private static final ConfiguredFeature<?, ?> RUBY_FEATURE = Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, SocketsBlocks.RUBY_ORE.get().getDefaultState(), 5))
             .withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 0, 60, 100)));
     private static final ConfiguredFeature<?, ?> SAPPHIRE_FEATURE = Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, SocketsBlocks.SAPPHIRE_ORE.get().getDefaultState(), 5))
