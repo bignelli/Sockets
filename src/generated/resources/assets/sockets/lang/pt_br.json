@@ -12,15 +12,21 @@
   "info.sockets.jei.ruby_gem": "Adiciona autocozimento quando dentro de ferramenta.",
   "info.sockets.jei.sapphire_gem": "Adiciona saque quando dentro de ferramenta/arma.",
   "item.sockets.diamond_gem": "Gema de Diamante",
+  "item.sockets.diamond_gem.shift.info": "+1 dano; +1 prote\u00E7\u00E3o",
   "item.sockets.emerald_gem": "Gema de Esmeralda",
+  "item.sockets.emerald_gem.shift.info": "Mais xp quebrando min\u00E9rio",
   "item.sockets.enchantful_gem": "Gema Encant\u00E1vel",
   "item.sockets.lazuli_gem": "Gema laz\u00FAli",
+  "item.sockets.lazuli_gem.shift.info": "+1 fortuna",
   "item.sockets.ruby": "Rubi",
   "item.sockets.ruby_gem": "Gema de Rubi",
+  "item.sockets.ruby_gem.shift.info": "Autocozimento",
   "item.sockets.sapphire": "Safira",
   "item.sockets.sapphire_gem": "Gema de Safira",
+  "item.sockets.sapphire_gem.shift.info": "+1 saque",
   "itemGroup.sockets": "Soquetes",
   "tooltip.sockets.enchantful_gem": "Encante esta Gema e seu soquete tamb\u00E9m ser\u00E1.",
   "tooltip.sockets.extra.default": "Gemas Contidas: ",
-  "tooltip.sockets.extra.enchantful_gem": "Encantado pela Gema Encant\u00E1vel"
+  "tooltip.sockets.extra.enchantful_gem": "Encantado pela Gema Encant\u00E1vel",
+  "tooltip.sockets.shift_key": "[SHIFT] para mais."
 }

@@ -16,6 +16,8 @@
 
 package nukeologist.sockets.common.item;
 
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,6 +25,9 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import nukeologist.sockets.api.cap.IGem;
 import nukeologist.sockets.api.cap.ISocketableItem;
@@ -77,6 +82,16 @@ public class GemItem extends Item {
     public GemItem components(final Supplier<List<ITextComponent>> components) {
         this.components = components;
         return this;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT) //Exception to the rule
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        if (Screen.hasShiftDown()) {
+            tooltip.add(new TranslationTextComponent(stack.getTranslationKey() + ".shift.info").applyTextStyle(TextFormatting.GRAY));
+        } else {
+            tooltip.add(new TranslationTextComponent(StringTranslations.SHIFT_KEY_DOWN).applyTextStyle(TextFormatting.DARK_GRAY));
+        }
     }
 
     @Override

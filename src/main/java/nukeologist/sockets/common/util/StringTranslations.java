@@ -25,6 +25,7 @@ public final class StringTranslations {
     //Item Tooltips
     public static final String ENCHANTFUL_TOOLTIP = "tooltip.sockets.enchantful_gem";
     public static final String ENCHANTFUL_EXTRA_TOOLTIP = "tooltip.sockets.extra.enchantful_gem";
+    public static final String SHIFT_KEY_DOWN = "tooltip.sockets.shift_key";
 
     //Gem Tooltips
     public static final String DEFAULT_GEM_EXTRA_TOOLTIP = "tooltip.sockets.extra.default";

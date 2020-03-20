@@ -12,15 +12,21 @@
   "info.sockets.jei.ruby_gem": "Adds auto smelting when socketed into a tool.",
   "info.sockets.jei.sapphire_gem": "Adds looting when socketed into a tool/weapon.",
   "item.sockets.diamond_gem": "Diamond Gem",
+  "item.sockets.diamond_gem.shift.info": "+1 damage; +1 protection",
   "item.sockets.emerald_gem": "Emerald Gem",
+  "item.sockets.emerald_gem.shift.info": "More xp on ore breaking",
   "item.sockets.enchantful_gem": "Enchantful Gem",
   "item.sockets.lazuli_gem": "Lazuli Gem",
+  "item.sockets.lazuli_gem.shift.info": "+1 fortune",
   "item.sockets.ruby": "Ruby",
   "item.sockets.ruby_gem": "Ruby Gem",
+  "item.sockets.ruby_gem.shift.info": "Auto Smelting",
   "item.sockets.sapphire": "Sapphire",
   "item.sockets.sapphire_gem": "Sapphire Gem",
+  "item.sockets.sapphire_gem.shift.info": "+1 looting",
   "itemGroup.sockets": "Sockets",
   "tooltip.sockets.enchantful_gem": "Enchant this Gem and it's socket shall be as well.",
   "tooltip.sockets.extra.default": "Contains Gems: ",
-  "tooltip.sockets.extra.enchantful_gem": "Enchanted by Enchantful Gem"
+  "tooltip.sockets.extra.enchantful_gem": "Enchanted by Enchantful Gem",
+  "tooltip.sockets.shift_key": "[SHIFT] for more."
 }

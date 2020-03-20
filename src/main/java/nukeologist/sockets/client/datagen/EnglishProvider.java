@@ -59,6 +59,13 @@ public class EnglishProvider extends LanguageProvider {
         add(StringTranslations.ENCHANTFUL_TOOLTIP, "Enchant this Gem and it's socket shall be as well.");
         add(StringTranslations.ENCHANTFUL_EXTRA_TOOLTIP, "Enchanted by Enchantful Gem");
         add(StringTranslations.DEFAULT_GEM_EXTRA_TOOLTIP, "Contains Gems: ");
+        add(StringTranslations.SHIFT_KEY_DOWN, "[SHIFT] for more.");
+
+        tooltip(SocketsItems.DIAMOND_GEM, "+1 damage; +1 protection");
+        tooltip(SocketsItems.EMERALD_GEM, "More xp on ore breaking");
+        tooltip(SocketsItems.LAZULI_GEM, "+1 fortune");
+        tooltip(SocketsItems.RUBY_GEM, "Auto Smelting");
+        tooltip(SocketsItems.SAPPHIRE_GEM, "+1 looting");
 
         //Jei
         add(StringTranslations.DIAMOND_GEM_JEI, "Adds damage when socketed into a tool/weapon. Resists some damage in armor.");
@@ -71,6 +78,10 @@ public class EnglishProvider extends LanguageProvider {
 
     private void add(final Supplier<Item> item, final String name) {
         add(item.get(), name);
+    }
+
+    private void tooltip(final Supplier<Item> item, final String tooltip) {
+        add(item.get().getTranslationKey() + ".shift.info", tooltip);
     }
 
     private void block(final Supplier<Block> item, final String name) {
