@@ -65,7 +65,8 @@ public class SocketRemoverScreen extends ContainerScreen<SocketRemoverContainer>
             for (int i = 0; i < handler.getSlots(); i++) {
                 gems[i] = SocketsAPI.getGem(handler.getStackInSlot(i)).orElse(null);
             }
-            if (SocketRemoverTileEntity.allGemsAccept(gems, socket, this.minecraft.player)) {
+            final SocketRemoverTileEntity te = this.container.getTile();
+            if (SocketRemoverTileEntity.allGemsAccept(gems, socket, this.minecraft.player) && te != null && this.minecraft.player.isCreative() || te.getTotalXp(gems, socket) <= this.minecraft.player.experienceLevel) {
                 final int slots = handler.getSlots();
                 for (int i = 1; i < 5 && i - 1 < slots; i++) {
                     final ItemStack gem = handler.getStackInSlot(i - 1);
@@ -85,6 +86,21 @@ public class SocketRemoverScreen extends ContainerScreen<SocketRemoverContainer>
         final int x = (this.width - this.xSize) / 2;
         final int y = (this.height - this.ySize) / 2;
         this.blit(x, y, 0, 0, this.xSize, this.ySize);
+    }
+
+    @Override   //Mostly copied from Anvil Screen
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        final SocketRemoverTileEntity te = this.container.getTile();
+        final int xp = te == null ? 0 : te.getTotalXp();
+        if (xp <= 0) return;
+        final String s = I18n.format("container.repair.cost", xp);
+        int k = this.xSize - 8 - this.font.getStringWidth(s) - 2;
+        int j = 8453920;
+        if (minecraft.player != null && !minecraft.player.isCreative() && minecraft.player.experienceLevel < xp) {
+            j = 16736352;
+        }
+        fill(k - 2, 67, this.xSize - 8, 79, 1325400064);
+        this.font.drawStringWithShadow(s, (float)k, 69.0F, j);
     }
 
     @Override

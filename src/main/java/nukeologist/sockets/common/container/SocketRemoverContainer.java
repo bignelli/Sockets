@@ -140,6 +140,10 @@ public class SocketRemoverContainer extends Container {
         return stack;
     }
 
+    public SocketRemoverTileEntity getTile() {
+        return te;
+    }
+
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
         return te != null && te.getDistanceSq(playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ()) <= 64D;
