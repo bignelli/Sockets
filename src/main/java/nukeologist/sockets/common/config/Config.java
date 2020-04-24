@@ -28,7 +28,7 @@ public final class Config {
     public static final ForgeConfigSpec SERVER_SPEC;
 
     private static final String[] defaultSockets = {"minecraft:diamond_sword=1", "minecraft:diamond_shovel=1", "minecraft:diamond_pickaxe=1", "minecraft:diamond_axe=1", "minecraft:diamond_hoe=1",
-    "minecraft:diamond_helmet=1", "minecraft:diamond_chestplate=1", "minecraft:diamond_leggings=1", "minecraft:diamond_boots=1"};
+    "minecraft:diamond_helmet=1", "minecraft:diamond_chestplate=1", "minecraft:diamond_leggings=1", "minecraft:diamond_boots=1", "minecraft:crossbow=1", "minecraft:bow=1"};
 
     static {
         final Pair<ServerConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(ServerConfig::new);
@@ -40,6 +40,8 @@ public final class Config {
 
         public final ForgeConfigSpec.BooleanValue enableRubyGen;
         public final ForgeConfigSpec.BooleanValue enableSapphireGen;
+        public final ForgeConfigSpec.BooleanValue enableAllTools;
+        public final ForgeConfigSpec.BooleanValue enableAllArmor;
 
         public final ForgeConfigSpec.IntValue dungeonEnchantfulChance;
 
@@ -61,9 +63,18 @@ public final class Config {
                     .comment("Chance that an Enchantful Gem spawns in a Dungeon Chest")
                     .defineInRange("dungeonEnchantfulChance", 50, 0, 100);
 
+            enableAllTools = builder
+                    .comment("Makes all verifiable tools have 1 Socket. Overriden by the map registrykey=int. WARNING: making this false will remove Gems from its affected items.")
+                    .define("enableAllTools", true);
+
+            enableAllArmor = builder
+                    .comment("Makes all verifiable armors have 1 Socket. Overriden by the map registrykey=int. WARNING: making this false will remove Gems from its affected items.")
+                    .define("enableAllArmor", true);
+
             socketsItems = builder
                     .comment("A Map of registrykey=int pairs. Adds the int value as the number of sockets to a given item (with a max of 4 sockets.)" + "\n" +
                             "WARNING: removing an item from this will remove all Gems it had. The item MUST also be not stackable.")
+                    .worldRestart()
                     .defineList("socketString2IntMap", Lists.newArrayList(defaultSockets), o -> o instanceof String);
         }
     }

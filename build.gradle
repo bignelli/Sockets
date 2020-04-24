@@ -14,10 +14,10 @@ apply plugin: 'maven-publish'
 
 ext {
     MC_VERSION = '1.15.2'
-    FORGE_VERSION = '31.1.30'
-    MY_VERSION = '1.1.1'
+    FORGE_VERSION = '31.1.48'
+    MY_VERSION = '1.2.0'
     MODID = 'sockets'
-    JEI_VERSION = '6.0.0.2'
+    JEI_VERSION = '6.0.0.3'
 }
 
 version = "${MC_VERSION}-${MY_VERSION}"

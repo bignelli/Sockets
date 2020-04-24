@@ -55,8 +55,13 @@ public enum CapabilityEventHandler {
         if (stack.getMaxStackSize() != 1) return;
         final Item item = stack.getItem();
         final int value = capItems.getValue().getInt(item.getRegistryName().toString());
-        if (value != 0)
+        if (value != 0) {
             event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider(stack, value));
+        } else if (item instanceof TieredItem && Config.SERVER.enableAllTools.get()) {
+            event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider(stack, 1));
+        } else if (item instanceof ArmorItem && Config.SERVER.enableAllArmor.get()) {
+            event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider(stack, 1));
+        }
     }
 
     private static Object2IntMap<String> getCaps() {
