@@ -65,11 +65,11 @@ public final class Config {
 
             enableAllTools = builder
                     .comment("Makes all verifiable tools have 1 Socket. Overriden by the map registrykey=int. WARNING: making this false will remove Gems from its affected items.")
-                    .define("enableAllTools", true);
+                    .define("enableAllTools", false);
 
             enableAllArmor = builder
                     .comment("Makes all verifiable armors have 1 Socket. Overriden by the map registrykey=int. WARNING: making this false will remove Gems from its affected items.")
-                    .define("enableAllArmor", true);
+                    .define("enableAllArmor", false);
 
             socketsItems = builder
                     .comment("A Map of registrykey=int pairs. Adds the int value as the number of sockets to a given item (with a max of 4 sockets.)" + "\n" +
