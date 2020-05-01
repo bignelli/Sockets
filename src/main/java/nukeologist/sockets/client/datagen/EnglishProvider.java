@@ -53,6 +53,7 @@ public class EnglishProvider extends LanguageProvider {
         add(SocketsItems.SAPPHIRE, "Sapphire");
         add(SocketsItems.RUBY_GEM, "Ruby Gem");
         add(SocketsItems.SAPPHIRE_GEM, "Sapphire Gem");
+        add(SocketsItems.CHARGEFUL_GEM, "Chargeful Gem");
 
         add("itemGroup.sockets", "Sockets");
 
@@ -66,6 +67,7 @@ public class EnglishProvider extends LanguageProvider {
         tooltip(SocketsItems.LAZULI_GEM, "+1 fortune");
         tooltip(SocketsItems.RUBY_GEM, "Auto Smelting");
         tooltip(SocketsItems.SAPPHIRE_GEM, "+1 looting");
+        tooltip(SocketsItems.CHARGEFUL_GEM, "Possible lightning!");
 
         //Jei
         add(StringTranslations.DIAMOND_GEM_JEI, "Adds damage when socketed into a tool/weapon. Resists some damage in armor.");
@@ -74,6 +76,7 @@ public class EnglishProvider extends LanguageProvider {
         add(StringTranslations.LAZULI_GEM_JEI, "Adds fortune when socketed into a tool/weapon.");
         add(StringTranslations.RUBY_GEM_JEI, "Adds auto smelting when socketed into a tool.");
         add(StringTranslations.SAPPHIRE_GEM_JEI, "Adds looting when socketed into a tool/weapon.");
+        add(StringTranslations.CHARGEFUL_GEM_JEI, "Adds a chance for lightnings when socketed into a tool/weapon, and attacking.");
     }
 
     private void add(final Supplier<Item> item, final String name) {

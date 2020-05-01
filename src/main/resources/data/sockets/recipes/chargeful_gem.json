@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "sockets:enchantful_gem"
+    },
+    {
+      "item": "minecraft:trident"
+    }
+  ],
+  "result": {
+    "item": "sockets:chargeful_gem"
+  }
+}

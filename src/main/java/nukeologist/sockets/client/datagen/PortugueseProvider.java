@@ -53,6 +53,7 @@ public class PortugueseProvider extends LanguageProvider {
         add(SocketsItems.SAPPHIRE, "Safira");
         add(SocketsItems.RUBY_GEM, "Gema de Rubi");
         add(SocketsItems.SAPPHIRE_GEM, "Gema de Safira");
+        add(SocketsItems.CHARGEFUL_GEM, "Gema Carregada");
 
         add("itemGroup.sockets", "Soquetes");
 
@@ -66,6 +67,7 @@ public class PortugueseProvider extends LanguageProvider {
         tooltip(SocketsItems.LAZULI_GEM, "+1 fortuna");
         tooltip(SocketsItems.RUBY_GEM, "Autocozimento");
         tooltip(SocketsItems.SAPPHIRE_GEM, "+1 saque");
+        tooltip(SocketsItems.CHARGEFUL_GEM, "Poss\u00EDvel Raio!");
 
         //Jei
         add(StringTranslations.DIAMOND_GEM_JEI, "Adiciona dano quando dentro de ferramenta/arma. Reduz danos quando em armaduras.");
@@ -74,6 +76,7 @@ public class PortugueseProvider extends LanguageProvider {
         add(StringTranslations.LAZULI_GEM_JEI, "Adiciona fortuna quando dentro de ferramenta/arma.");
         add(StringTranslations.RUBY_GEM_JEI, "Adiciona autocozimento quando dentro de ferramenta.");
         add(StringTranslations.SAPPHIRE_GEM_JEI, "Adiciona saque quando dentro de ferramenta/arma.");
+        add(StringTranslations.CHARGEFUL_GEM_JEI, "Adiciona uma chance de raios quando dentro de ferramenta/arma, e atacando.");
     }
 
     private void add(final Supplier<Item> item, final String name) {

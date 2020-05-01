@@ -49,6 +49,7 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
         defaultGem(SocketsItems.SAPPHIRE_GEM, SocketsTags.Items.STORAGE_BLOCKS_SAPPHIRE, SocketsTags.Items.GEMS_SAPPHIRE, "has_sapphire", consumer);
 
         ShapedRecipeBuilder.shapedRecipe(SocketsBlocks.SOCKET_REMOVER.get()).key('#', SocketsTags.Items.GEMS).key('@', Items.ANVIL).patternLine("###").patternLine("#@#").patternLine("###").addCriterion("has_anvil", hasItem(Items.ANVIL)).build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(SocketsItems.CHARGEFUL_GEM.get()).addIngredient(SocketsItems.ENCHANTFUL_GEM.get()).addIngredient(Items.TRIDENT).addCriterion("has_enchantful", hasItem(SocketsItems.ENCHANTFUL_GEM.get())).build(consumer);
     }
 
     private void compactBlock(final Supplier<Block> block, final Tag<Item> itemTag, final Tag<Item> blockTag, final Supplier<Item> reverse, final String itemCriterion, final String blockCriterion, final Consumer<IFinishedRecipe> consumer) {

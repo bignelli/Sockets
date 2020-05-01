@@ -18,10 +18,14 @@ package nukeologist.sockets.common.registry;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.LightningBoltEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -70,6 +74,7 @@ public final class SocketsItems {
     public static final RegistryObject<Item> SAPPHIRE_ORE = ITEMS.register("sapphire_ore", () -> new BlockItem(SocketsBlocks.SAPPHIRE_ORE.get(), defaultGroup()));
     public static final RegistryObject<Item> RUBY_BLOCK = ITEMS.register("ruby_block", () -> new BlockItem(SocketsBlocks.RUBY_BLOCK.get(), defaultGroup()));
     public static final RegistryObject<Item> SAPPHIRE_BLOCK = ITEMS.register("sapphire_block", () -> new BlockItem(SocketsBlocks.SAPPHIRE_BLOCK.get(), defaultGroup()));
+    public static final RegistryObject<Item> CHARGEFUL_GEM = ITEMS.register("chargeful_gem", () -> new GemItem(defaultGem()));
 
     private static Item.Properties defaultGroup() {
         return new Item.Properties().group(SOCKETS_GROUP);
@@ -117,7 +122,7 @@ public final class SocketsItems {
 
     private static final EquipmentSlotType[] ARMOR = new EquipmentSlotType[]{EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET, EquipmentSlotType.HEAD};
 
-    //Diamond Gem
+    //Diamond Gem and Chargeful Gem
     public static void onHurtEvent(final LivingHurtEvent event) {
         for (final EquipmentSlotType type : ARMOR) {
             final long equipLevel = countGems(event.getEntityLiving(), DIAMOND_GEM.get(), type);
@@ -128,6 +133,14 @@ public final class SocketsItems {
         final LivingEntity entity = (LivingEntity) source;
         final long diamonds = countGems(entity, DIAMOND_GEM.get(), EquipmentSlotType.MAINHAND);
         event.setAmount(event.getAmount() + diamonds);
+        final long chargefuls = countGems(entity, CHARGEFUL_GEM.get(), EquipmentSlotType.MAINHAND);
+        final World world = entity.getEntityWorld();
+        if (chargefuls > 0 && !world.isRemote) {
+            final LivingEntity victim = event.getEntityLiving();
+            final LightningBoltEntity bolt = new LightningBoltEntity(world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), false);
+            bolt.setCaster((ServerPlayerEntity) entity);
+            ((ServerWorld) world).addLightningBolt(bolt);
+        }
     }
 
     //Emerald Gem

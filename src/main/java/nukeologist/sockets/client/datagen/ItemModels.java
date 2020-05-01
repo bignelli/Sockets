@@ -46,6 +46,7 @@ public class ItemModels extends ItemModelProvider {
         generated(SocketsItems.SAPPHIRE);
         generated(SocketsItems.RUBY_GEM);
         generated(SocketsItems.SAPPHIRE_GEM);
+        generated(SocketsItems.CHARGEFUL_GEM);
 
         //blocks
         itemBlock(SocketsBlocks.SOCKET_REMOVER);

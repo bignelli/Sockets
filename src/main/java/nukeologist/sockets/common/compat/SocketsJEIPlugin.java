@@ -39,6 +39,7 @@ public final class SocketsJEIPlugin implements IModPlugin {
         registry.addIngredientInfo(new ItemStack(SocketsItems.LAZULI_GEM.get()), VanillaTypes.ITEM, StringTranslations.LAZULI_GEM_JEI);
         registry.addIngredientInfo(new ItemStack(SocketsItems.RUBY_GEM.get()), VanillaTypes.ITEM, StringTranslations.RUBY_GEM_JEI);
         registry.addIngredientInfo(new ItemStack(SocketsItems.SAPPHIRE_GEM.get()), VanillaTypes.ITEM, StringTranslations.SAPPHIRE_GEM_JEI);
+        registry.addIngredientInfo(new ItemStack(SocketsItems.CHARGEFUL_GEM.get()), VanillaTypes.ITEM, StringTranslations.CHARGEFUL_GEM_JEI);
     }
 
     @Override

@@ -14,7 +14,7 @@ apply plugin: 'maven-publish'
 
 ext {
     MC_VERSION = '1.15.2'
-    FORGE_VERSION = '31.1.48'
+    FORGE_VERSION = '31.1.63'
     MY_VERSION = '1.2.0'
     MODID = 'sockets'
     JEI_VERSION = '6.0.0.3'

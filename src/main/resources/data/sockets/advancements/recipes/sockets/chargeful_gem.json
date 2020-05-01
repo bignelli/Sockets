@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "sockets:chargeful_gem"
+    ]
+  },
+  "criteria": {
+    "has_enchantful": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "sockets:enchantful_gem"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "sockets:chargeful_gem"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_enchantful",
+      "has_the_recipe"
+    ]
+  ]
+}

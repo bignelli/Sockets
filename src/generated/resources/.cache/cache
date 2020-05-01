@@ -3,13 +3,14 @@
 344bdd818c5d14644bbebe1f95276b6f0ae77f6b assets\sockets\blockstates\sapphire_block.json
 ad9c616c845aec0a4f72c2f53150b26477c56d8c assets\sockets\blockstates\sapphire_ore.json
 570606e7b74f571b9bc4a3e885a1899f9f8e8658 assets\sockets\blockstates\socket_remover.json
-216d278648586659f39c894da2bf4e714423e91f assets\sockets\lang\en_us.json
-bc82324234710c9723e762eb83954beef5402075 assets\sockets\lang\pt_br.json
+1228ba29137ca75918bcd82277a1c7d5fc0b27c0 assets\sockets\lang\en_us.json
+3f91a0604a7a219c6548c508f09c4acca774b41a assets\sockets\lang\pt_br.json
 3ac97f349ce23bb33642144951e6fbe157bec113 assets\sockets\models\block\ruby_block.json
 f7c99bbc4745a9cbadd455bc166e269f3f3e4f55 assets\sockets\models\block\ruby_ore.json
 b7c3bc7c73e0207486ec141507006cfcf1e4f2cd assets\sockets\models\block\sapphire_block.json
 66531d905ed827d8a0758edc1ef6ed1ec09741a5 assets\sockets\models\block\sapphire_ore.json
 2eeb44b15ea4c90099381e5af84d87aace9e4a4d assets\sockets\models\block\socket_remover.json
+ee79a14aaa0652c96904d45a97d39cb00dc37f34 assets\sockets\models\item\chargeful_gem.json
 542a62f6335c464a7d1150794c8f11096cb6d123 assets\sockets\models\item\diamond_gem.json
 40f9f09bc9c621f35c2a59f7869351c7f9688189 assets\sockets\models\item\emerald_gem.json
 69f5810819e6f82f599579aa3d2b3c63c0c7124e assets\sockets\models\item\enchantful_gem.json
@@ -38,6 +39,7 @@ aae65e7180a9f48096bf9bd489d3ca297ea55cc1 data\forge\tags\items\gems.json
 ec5e2f43669df6f31c8d48bd4d18aa65630a6fb6 data\forge\tags\items\storage_blocks.json
 0f9d54916e2d894e5142724e96c4030eedfd2109 data\forge\tags\items\storage_blocks\ruby.json
 6ce0b496d4d3387f2a7172698e68ed2cc6463df9 data\forge\tags\items\storage_blocks\sapphire.json
+e9089bdf2d0411c84bf629a3d50467942c821e57 data\sockets\advancements\recipes\sockets\chargeful_gem.json
 257d939893d7461669b1562445d68d2bd388098f data\sockets\advancements\recipes\sockets\diamond_gem.json
 bfcd51ee1fb9292f8657ea0dc3b9879d9894bcaf data\sockets\advancements\recipes\sockets\emerald_gem.json
 968ea269b82c7c4136a77880632decd1821f9b4b data\sockets\advancements\recipes\sockets\lazuli_gem.json
@@ -56,6 +58,7 @@ e8ca424a6d7eadae359cf08bfbec978046ab04f1 data\sockets\loot_tables\blocks\ruby_bl
 2727a890256155053643100412a143b7572818a2 data\sockets\loot_tables\blocks\sapphire_block.json
 8fb3ebea3a9767402f317e90b5d397250ce4d2e0 data\sockets\loot_tables\blocks\sapphire_ore.json
 5db465b7594dbd6831156234349226f81c42287e data\sockets\loot_tables\blocks\socket_remover.json
+629860f49fa2b2c41949afa2b89405effe5cb51d data\sockets\recipes\chargeful_gem.json
 19580ec7c3b39a3553d54e75a46108aee108724b data\sockets\recipes\diamond_gem.json
 028fdb570e6d0c9971a1ec80aefe108d2eedd4d3 data\sockets\recipes\emerald_gem.json
 bc3bede4f9cc2a8fcc97fd5f0b232ea1cf9db2f3 data\sockets\recipes\lazuli_gem.json
@@ -66,4 +69,4 @@ e603da55c3f5bd53f504d329075c2a041a4994d9 data\sockets\recipes\ruby_gem.json
 f916b0f9fd1ac9125dbceecf4d3f9af263a12369 data\sockets\recipes\sapphire_block.json
 b84600ff83a361bebc2d422e2a3d1b03b4fc2c71 data\sockets\recipes\sapphire_gem.json
 b86f64af3e52a7132f4dde30e1f60aa7ce33f732 data\sockets\recipes\socket_remover.json
-f5406582d4f9c69db614069184be99d353c5dbe2 data\sockets\tags\items\gems.json
+8b0a56a5dd6a0c2b5d262d7785acc02ade587e57 data\sockets\tags\items\gems.json
