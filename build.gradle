@@ -14,7 +14,7 @@ apply plugin: 'maven-publish'
 
 ext {
     MC_VERSION = '1.15.2'
-    FORGE_VERSION = '31.1.63'
+    FORGE_VERSION = '31.2.27'
     MY_VERSION = '1.2.0'
     MODID = 'sockets'
     JEI_VERSION = '6.0.0.3'
@@ -27,7 +27,7 @@ archivesBaseName = 'Sockets'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200214-1.15.1'
+    mappings channel: 'snapshot', version: '20200625-1.15.1'
 
     runs {
         client {

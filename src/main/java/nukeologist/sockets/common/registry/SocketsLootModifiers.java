@@ -30,7 +30,7 @@ public final class SocketsLootModifiers {
     private SocketsLootModifiers() {
     }
 
-    public static final DeferredRegister<GlobalLootModifierSerializer<?>> MODIFIERS = new DeferredRegister<>(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, SocketsAPI.ID);
+    public static final DeferredRegister<GlobalLootModifierSerializer<?>> MODIFIERS = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, SocketsAPI.ID);
 
     public static final RegistryObject<GlobalLootModifierSerializer<?>> SMELT = MODIFIERS.register("smelting", SmeltingModifier.Serializer::new);
     public static final RegistryObject<GlobalLootModifierSerializer<?>> FORTUNE = MODIFIERS.register("fortune", FortuneModifier.Serializer::new);

@@ -29,7 +29,7 @@ public final class SocketsContainers {
     private SocketsContainers() {
     }
 
-    public static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, SocketsAPI.ID);
+    public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, SocketsAPI.ID);
 
     public static final RegistryObject<ContainerType<SocketRemoverContainer>> SOCKET_REMOVER = CONTAINERS.register("socket_remover", () -> IForgeContainerType.create(SocketRemoverContainer::new));
 }

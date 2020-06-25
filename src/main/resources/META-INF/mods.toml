@@ -14,12 +14,12 @@ description='''Fun and games!  Adds Gems and makes some items have sockets that 
 [[dependencies.sockets]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[31.1.18,)" #mandatory
+    versionRange="[31.2.12,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.sockets]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.2,1.17)"
+    versionRange="[1.15.2]"
     ordering="NONE"
     side="BOTH"

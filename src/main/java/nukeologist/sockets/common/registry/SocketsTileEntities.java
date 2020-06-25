@@ -28,7 +28,7 @@ public final class SocketsTileEntities {
     private SocketsTileEntities() {
     }
 
-    public static final DeferredRegister<TileEntityType<?>> TILES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, SocketsAPI.ID);
+    public static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, SocketsAPI.ID);
 
     public static final RegistryObject<TileEntityType<SocketRemoverTileEntity>> SOCKET_REMOVER = TILES.register("socket_remover", () -> TileEntityType.Builder.create(SocketRemoverTileEntity::new, SocketsBlocks.SOCKET_REMOVER.get()).build(null));
 }

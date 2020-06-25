@@ -58,7 +58,7 @@ public final class SocketsItems {
         }
     };
 
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, SocketsAPI.ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SocketsAPI.ID);
 
     //If there is "_gem" in the registry name, it will be automagically added to a sockets:gems tag.
     public static final RegistryObject<Item> DIAMOND_GEM = ITEMS.register("diamond_gem", () -> new GemItem(defaultGem()));
