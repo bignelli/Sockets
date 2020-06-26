@@ -1,5 +1,7 @@
 {
-  "conditions": [],
+  "conditions": [
+
+  ],
   "function": "sockets:chargeful",
   "entity_type": "minecraft:elder_guardian"
 }

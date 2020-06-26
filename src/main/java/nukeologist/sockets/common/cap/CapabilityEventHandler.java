@@ -28,6 +28,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import nukeologist.sockets.api.SocketsAPI;
@@ -46,7 +47,8 @@ public enum CapabilityEventHandler {
     INSTANCE;
 
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final LazyValue<Object2IntMap<String>> capItems = new LazyValue<>(CapabilityEventHandler::getCaps);
+
+    private static LazyValue<Object2IntMap<String>> capItems = makeLazy();
 
     @SubscribeEvent
     public void attachCap(AttachCapabilitiesEvent<ItemStack> event) {
@@ -62,6 +64,18 @@ public enum CapabilityEventHandler {
         } else if (item instanceof ArmorItem && Config.SERVER.enableAllArmor.get()) {
             event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider(stack, 1));
         }
+    }
+
+    @SubscribeEvent
+    public void onConfigReload(ModConfig.Reloading event) {
+        if (event.getConfig().getModId().equals(SocketsAPI.ID)) {
+            LOGGER.debug(CORE, "Reloading Config...");
+            capItems = makeLazy();
+        }
+    }
+
+    private static LazyValue<Object2IntMap<String>> makeLazy() {
+        return new LazyValue<>(CapabilityEventHandler::getCaps);
     }
 
     private static Object2IntMap<String> getCaps() {
