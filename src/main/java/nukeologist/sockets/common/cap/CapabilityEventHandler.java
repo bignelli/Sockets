@@ -59,7 +59,7 @@ public enum CapabilityEventHandler {
         final int value = capItems.getValue().getInt(item.getRegistryName().toString());
         if (value != 0) {
             event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider(stack, value));
-        } else if (item instanceof TieredItem && Config.SERVER.enableAllTools.get()) {
+        } else if ((item instanceof TieredItem || !stack.getToolTypes().isEmpty()) && Config.SERVER.enableAllTools.get()) {
             event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider(stack, 1));
         } else if (item instanceof ArmorItem && Config.SERVER.enableAllArmor.get()) {
             event.addCapability(modLoc("socket"), CapabilitySocketableItem.createProvider(stack, 1));
