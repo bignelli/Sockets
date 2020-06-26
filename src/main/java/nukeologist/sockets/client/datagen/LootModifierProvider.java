@@ -54,7 +54,7 @@ public class LootModifierProvider implements IDataProvider {
     }
 
     protected void addLootModifiers() {
-        modifiers = GlobalLootModifiers.of(modLoc("smelting").toString(), modLoc("fortune").toString(), modLoc("enchantful").toString());
+        modifiers = GlobalLootModifiers.of(modLoc("smelting").toString(), modLoc("fortune").toString(), modLoc("enchantful").toString(), modLoc("chargeful").toString());
     }
 
     protected ResourceLocation modLoc(final String path) {
@@ -68,6 +68,7 @@ public class LootModifierProvider implements IDataProvider {
         save(cache, new ModifierTest("sockets:smelting", "{socketsSmelt:1b}", "minecraft:match_tool"), this.gen.getOutputFolder().resolve("data/" + modid + "/loot_modifiers/smelting.json"));
         save(cache, new ModifierTest("sockets:fortune", "{socketsFortune:1b}", "minecraft:match_tool"), this.gen.getOutputFolder().resolve("data/" + modid + "/loot_modifiers/fortune.json"));
         save(cache, new ModifierTest2("sockets:enchantful", "minecraft:chest", "minecraft:location_check"), this.gen.getOutputFolder().resolve("data/" + modid + "/loot_modifiers/enchantful.json"));
+        save(cache, new ModifierTest3("sockets:chargeful",  "minecraft:elder_guardian"), this.gen.getOutputFolder().resolve("data/" + modid + "/loot_modifiers/chargeful.json"));
     }
 
     /*Copy from LanguageProvider */
@@ -167,6 +168,31 @@ public class LootModifierProvider implements IDataProvider {
             private Dummy(String block) {
                 this.block = block;
             }
+        }
+
+    }
+
+    protected static class ModifierTest3 {
+
+        private ModifierTest3(String function, String id) {
+            this.function = function;
+            this.conditions = Collections.emptyList();
+            this.entity_type = id;
+        }
+
+        private List<ModifierTest3.Condition> conditions;
+        private String function;
+        private String entity_type;
+
+        private static class Condition {
+
+            private Condition(String condition, String id) {
+                this.condition = condition;
+                this.entity = id;
+            }
+            private String condition;
+            private String entity;
+
         }
 
     }

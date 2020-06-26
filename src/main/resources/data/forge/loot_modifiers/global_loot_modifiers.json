@@ -3,6 +3,7 @@
   "entries": [
     "sockets:smelting",
     "sockets:fortune",
-    "sockets:enchantful"
+    "sockets:enchantful",
+    "sockets:chargeful"
   ]
 }

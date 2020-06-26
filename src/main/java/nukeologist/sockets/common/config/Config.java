@@ -44,6 +44,7 @@ public final class Config {
         public final ForgeConfigSpec.BooleanValue enableAllArmor;
 
         public final ForgeConfigSpec.IntValue dungeonEnchantfulChance;
+        public final ForgeConfigSpec.IntValue chargefulChance;
 
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> socketsItems;
 
@@ -62,6 +63,10 @@ public final class Config {
             dungeonEnchantfulChance = builder
                     .comment("Chance that an Enchantful Gem spawns in a Dungeon Chest")
                     .defineInRange("dungeonEnchantfulChance", 50, 0, 100);
+
+            chargefulChance = builder
+                    .comment("Chance that a Chargeful Gem drops from the specified mob in the loot modifier. By default, an elder guardian.")
+                    .defineInRange("chargefulChance", 80, 0, 100);
 
             enableAllTools = builder
                     .comment("Makes all verifiable tools have 1 Socket. Overriden by the map registrykey=int. WARNING: making this false will remove Gems from its affected items.")
