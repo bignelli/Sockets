@@ -45,6 +45,7 @@ public final class Config {
 
         public final ForgeConfigSpec.IntValue dungeonEnchantfulChance;
         public final ForgeConfigSpec.IntValue chargefulChance;
+        public final ForgeConfigSpec.IntValue lightningChance;
 
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> socketsItems;
 
@@ -67,6 +68,10 @@ public final class Config {
             chargefulChance = builder
                     .comment("Chance that a Chargeful Gem drops from the specified mob in the loot modifier. By default, an elder guardian.")
                     .defineInRange("chargefulChance", 80, 0, 100);
+
+            lightningChance = builder
+                    .comment("Chance that a lightning will strike the mob affected by the Chargeful Gem")
+                    .defineInRange("lightningChance", 10, 0, 100);
 
             enableAllTools = builder
                     .comment("Makes all verifiable tools have 1 Socket. Overriden by the map registrykey=int. WARNING: making this false will remove Gems from its affected items.")

@@ -34,10 +34,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import nukeologist.sockets.api.SocketsAPI;
 import nukeologist.sockets.api.cap.ISocketableItem;
+import nukeologist.sockets.common.config.Config;
 import nukeologist.sockets.common.item.EnchantfulGemItem;
 import nukeologist.sockets.common.item.GemItem;
 
 import java.util.Comparator;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 public final class SocketsItems {
@@ -121,6 +123,7 @@ public final class SocketsItems {
     }
 
     private static final EquipmentSlotType[] ARMOR = new EquipmentSlotType[]{EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET, EquipmentSlotType.HEAD};
+    private static final Random RANDOM = new Random();
 
     //Diamond Gem and Chargeful Gem
     public static void onHurtEvent(final LivingHurtEvent event) {
@@ -135,7 +138,7 @@ public final class SocketsItems {
         event.setAmount(event.getAmount() + diamonds);
         final long chargefuls = countGems(entity, CHARGEFUL_GEM.get(), EquipmentSlotType.MAINHAND);
         final World world = entity.getEntityWorld();
-        if (chargefuls > 0 && !world.isRemote) {
+        if (chargefuls > 0 && !world.isRemote && RANDOM.nextInt(100) < Config.SERVER.lightningChance.get()) {
             final LivingEntity victim = event.getEntityLiving();
             final LightningBoltEntity bolt = new LightningBoltEntity(world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), false);
             bolt.setCaster((ServerPlayerEntity) entity);
