@@ -1,4 +1,5 @@
 {
+  "type": "sockets:fortune",
   "conditions": [
     {
       "condition": "minecraft:match_tool",
@@ -6,6 +7,5 @@
         "nbt": "{socketsFortune:1b}"
       }
     }
-  ],
-  "function": "sockets:fortune"
+  ]
 }
