@@ -79,7 +79,7 @@ public class EnchantfulGemItem extends Item {
 
             @Override
             public List<ITextComponent> getExtraTooltip() {
-                return Collections.singletonList(new TranslationTextComponent(StringTranslations.ENCHANTFUL_EXTRA_TOOLTIP).applyTextStyle(TextFormatting.GREEN));
+                return Collections.singletonList(new TranslationTextComponent(StringTranslations.ENCHANTFUL_EXTRA_TOOLTIP).func_240699_a_(TextFormatting.GREEN));
             }
         });
     }
@@ -87,7 +87,7 @@ public class EnchantfulGemItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT) //Avoid OnlyIn as much as possible, though this method is an exception.
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent(StringTranslations.ENCHANTFUL_TOOLTIP).applyTextStyle(TextFormatting.GREEN));
+        tooltip.add(new TranslationTextComponent(StringTranslations.ENCHANTFUL_TOOLTIP).func_240699_a_(TextFormatting.GREEN));
     }
 
     private boolean isContainedEnchantment(final CompoundNBT nbt, final ItemStack stack, final List<String> ench) {

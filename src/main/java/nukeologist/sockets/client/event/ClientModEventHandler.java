@@ -44,8 +44,9 @@ public final class ClientModEventHandler {
             gen.addProvider(new ItemModels(gen, helper));
         }
         if (event.includeServer()) {
-            gen.addProvider(new BlockTagProvider(gen));
-            gen.addProvider(new ItemTagProvider(gen));
+            final BlockTagProvider blockTagProvider = new BlockTagProvider(gen);
+            gen.addProvider(blockTagProvider);
+            gen.addProvider(new ItemTagProvider(gen, blockTagProvider));
             gen.addProvider(new LootProvider(gen));
             gen.addProvider(new LootModifierProvider(gen));
             gen.addProvider(new Recipes(gen));

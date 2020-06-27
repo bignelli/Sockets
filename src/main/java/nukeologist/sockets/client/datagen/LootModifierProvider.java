@@ -107,13 +107,13 @@ public class LootModifierProvider implements IDataProvider {
     //TEMPORARY, WIP
     protected static class ModifierTest {
 
-        private ModifierTest(String function, String nbt, String condition) {
-            this.function = function;
+        private ModifierTest(String type, String nbt, String condition) {
+            this.type = type;
             this.conditions = Collections.singletonList(new Condition(nbt, condition));
         }
 
+        private String type;
         private List<Condition> conditions;
-        private String function;
 
         private static class Condition {
 
@@ -136,13 +136,13 @@ public class LootModifierProvider implements IDataProvider {
 
     protected static class ModifierTest2 {
 
-        private ModifierTest2(String function, String block, String condition) {
-            this.function = function;
+        private ModifierTest2(String type, String block, String condition) {
+            this.type = type;
             this.conditions = Collections.singletonList(new ModifierTest2.Condition(block, condition));
         }
 
+        private String type;
         private List<ModifierTest2.Condition> conditions;
-        private String function;
 
         private static class Condition {
 
@@ -174,14 +174,14 @@ public class LootModifierProvider implements IDataProvider {
 
     protected static class ModifierTest3 {
 
-        private ModifierTest3(String function, String id) {
-            this.function = function;
+        private ModifierTest3(String type, String id) {
+            this.type = type;
             this.conditions = Collections.emptyList();
             this.entity_type = id;
         }
 
+        private String type;
         private List<ModifierTest3.Condition> conditions;
-        private String function;
         private String entity_type;
 
         private static class Condition {

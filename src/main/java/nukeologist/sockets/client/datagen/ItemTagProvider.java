@@ -16,6 +16,7 @@
 
 package nukeologist.sockets.client.datagen;
 
+import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Item;
@@ -28,8 +29,8 @@ import java.util.regex.Pattern;
 
 public class ItemTagProvider extends ItemTagsProvider {
 
-    public ItemTagProvider(DataGenerator generatorIn) {
-        super(generatorIn);
+    public ItemTagProvider(DataGenerator generatorIn, BlockTagsProvider blockTagProvider) {
+        super(generatorIn, blockTagProvider);
     }
 
     private static final Pattern GEM = Pattern.compile(".*_gem$");
@@ -37,20 +38,20 @@ public class ItemTagProvider extends ItemTagsProvider {
     @Override
     protected void registerTags() {
         //ores
-        copy(SocketsTags.Blocks.ORES_RUBY, SocketsTags.Items.ORES_RUBY);
-        copy(SocketsTags.Blocks.ORES_SAPPHIRE, SocketsTags.Items.ORES_SAPPHIRE);
+        func_240521_a_(SocketsTags.Blocks.ORES_RUBY, SocketsTags.Items.ORES_RUBY);
+        func_240521_a_(SocketsTags.Blocks.ORES_SAPPHIRE, SocketsTags.Items.ORES_SAPPHIRE);
 
         //StorageBlocks
-        getBuilder(Tags.Items.STORAGE_BLOCKS).add(SocketsTags.Items.STORAGE_BLOCKS_RUBY, SocketsTags.Items.STORAGE_BLOCKS_SAPPHIRE);
-        copy(SocketsTags.Blocks.STORAGE_BLOCKS_RUBY, SocketsTags.Items.STORAGE_BLOCKS_RUBY);
-        copy(SocketsTags.Blocks.STORAGE_BLOCKS_SAPPHIRE, SocketsTags.Items.STORAGE_BLOCKS_SAPPHIRE);
+        func_240522_a_(Tags.Items.STORAGE_BLOCKS).addTags(SocketsTags.Items.STORAGE_BLOCKS_RUBY, SocketsTags.Items.STORAGE_BLOCKS_SAPPHIRE);
+        func_240521_a_(SocketsTags.Blocks.STORAGE_BLOCKS_RUBY, SocketsTags.Items.STORAGE_BLOCKS_RUBY);
+        func_240521_a_(SocketsTags.Blocks.STORAGE_BLOCKS_SAPPHIRE, SocketsTags.Items.STORAGE_BLOCKS_SAPPHIRE);
 
         //Forge Gems
-        getBuilder(Tags.Items.GEMS).add(SocketsTags.Items.GEMS_RUBY, SocketsTags.Items.GEMS_SAPPHIRE);
-        getBuilder(SocketsTags.Items.GEMS_RUBY).add(SocketsItems.RUBY.get());
-        getBuilder(SocketsTags.Items.GEMS_SAPPHIRE).add(SocketsItems.SAPPHIRE.get());
+        func_240522_a_(Tags.Items.GEMS).addTags(SocketsTags.Items.GEMS_RUBY, SocketsTags.Items.GEMS_SAPPHIRE);
+        func_240522_a_(SocketsTags.Items.GEMS_RUBY).func_240534_a_(SocketsItems.RUBY.get());
+        func_240522_a_(SocketsTags.Items.GEMS_SAPPHIRE).func_240534_a_(SocketsItems.SAPPHIRE.get());
 
-        getBuilder(SocketsTags.Items.GEMS).add(getGems());
+        func_240522_a_(SocketsTags.Items.GEMS).func_240534_a_(getGems());
     }
 
     //Trying something new

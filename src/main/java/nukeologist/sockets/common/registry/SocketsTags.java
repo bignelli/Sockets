@@ -19,8 +19,8 @@ package nukeologist.sockets.common.registry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import nukeologist.sockets.Sockets;
 
@@ -35,33 +35,33 @@ public final class SocketsTags {
 
     public static class Blocks {
 
-        public static final Tag<Block> ORES_RUBY = forge("ores/ruby");
-        public static final Tag<Block> ORES_SAPPHIRE = forge("ores/sapphire");
-        public static final Tag<Block> STORAGE_BLOCKS_RUBY = forge("storage_blocks/ruby");
-        public static final Tag<Block> STORAGE_BLOCKS_SAPPHIRE = forge("storage_blocks/sapphire");
+        public static final ITag.INamedTag<Block> ORES_RUBY = forge("ores/ruby");
+        public static final ITag.INamedTag<Block> ORES_SAPPHIRE = forge("ores/sapphire");
+        public static final ITag.INamedTag<Block> STORAGE_BLOCKS_RUBY = forge("storage_blocks/ruby");
+        public static final ITag.INamedTag<Block> STORAGE_BLOCKS_SAPPHIRE = forge("storage_blocks/sapphire");
 
-        private static Tag<Block> forge(final String s) {
-            return new BlockTags.Wrapper(new ResourceLocation("forge", s));
+        private static ITag.INamedTag<Block> forge(final String s) {
+            return BlockTags.makeWrapperTag(new ResourceLocation("forge", s).toString());
         }
     }
 
     public static class Items {
 
-        public static final Tag<Item> ORES_RUBY = forge("ores/ruby");
-        public static final Tag<Item> ORES_SAPPHIRE = forge("ores/sapphire");
-        public static final Tag<Item> GEMS_RUBY = forge("gems/ruby");
-        public static final Tag<Item> GEMS_SAPPHIRE = forge("gems/sapphire");
-        public static final Tag<Item> STORAGE_BLOCKS_RUBY = forge("storage_blocks/ruby");
-        public static final Tag<Item> STORAGE_BLOCKS_SAPPHIRE = forge("storage_blocks/sapphire");
+        public static final ITag.INamedTag<Item> ORES_RUBY = forge("ores/ruby");
+        public static final ITag.INamedTag<Item> ORES_SAPPHIRE = forge("ores/sapphire");
+        public static final ITag.INamedTag<Item> GEMS_RUBY = forge("gems/ruby");
+        public static final ITag.INamedTag<Item> GEMS_SAPPHIRE = forge("gems/sapphire");
+        public static final ITag.INamedTag<Item> STORAGE_BLOCKS_RUBY = forge("storage_blocks/ruby");
+        public static final ITag.INamedTag<Item> STORAGE_BLOCKS_SAPPHIRE = forge("storage_blocks/sapphire");
 
-        public static final Tag<Item> GEMS = tag("gems");
+        public static final ITag.INamedTag<Item> GEMS = tag("gems");
 
-        private static Tag<Item> forge(final String s) {
-            return new ItemTags.Wrapper(new ResourceLocation("forge", s));
+        private static ITag.INamedTag<Item> forge(final String s) {
+            return ItemTags.makeWrapperTag(new ResourceLocation("forge", s).toString());
         }
 
-        private static Tag<Item> tag(final String s) {
-            return new ItemTags.Wrapper(Sockets.modLoc(s));
+        private static ITag.INamedTag<Item> tag(final String s) {
+            return ItemTags.makeWrapperTag(Sockets.modLoc(s).toString());
         }
 
     }

@@ -1,4 +1,5 @@
 {
+  "type": "sockets:enchantful",
   "conditions": [
     {
       "condition": "minecraft:location_check",
@@ -8,6 +9,5 @@
         }
       }
     }
-  ],
-  "function": "sockets:enchantful"
+  ]
 }

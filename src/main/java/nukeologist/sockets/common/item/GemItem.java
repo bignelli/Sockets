@@ -87,10 +87,10 @@ public class GemItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT) //Exception to the rule
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        if (Screen.hasShiftDown()) {
-            tooltip.add(new TranslationTextComponent(stack.getTranslationKey() + ".shift.info").applyTextStyle(TextFormatting.GRAY));
+        if (Screen.func_231173_s_()) {
+            tooltip.add(new TranslationTextComponent(stack.getTranslationKey() + ".shift.info").func_240699_a_(TextFormatting.GRAY));
         } else {
-            tooltip.add(new TranslationTextComponent(StringTranslations.SHIFT_KEY_DOWN).applyTextStyle(TextFormatting.DARK_GRAY));
+            tooltip.add(new TranslationTextComponent(StringTranslations.SHIFT_KEY_DOWN).func_240699_a_(TextFormatting.DARK_GRAY));
         }
     }
 
@@ -122,8 +122,8 @@ public class GemItem extends Item {
             @Override
             public List<ITextComponent> getExtraTooltip() {
                 return components == null ?
-                        Collections.singletonList(new TranslationTextComponent(StringTranslations.DEFAULT_GEM_EXTRA_TOOLTIP).applyTextStyle(TextFormatting.GOLD)
-                                .appendSibling(new TranslationTextComponent(stack.getTranslationKey())))
+                        Collections.singletonList(new TranslationTextComponent(StringTranslations.DEFAULT_GEM_EXTRA_TOOLTIP).func_240699_a_(TextFormatting.GOLD)
+                                .func_230529_a_(new TranslationTextComponent(stack.getTranslationKey())))
                         : components.get();
             }
 

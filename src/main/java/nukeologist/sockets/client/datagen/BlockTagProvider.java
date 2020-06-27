@@ -31,13 +31,13 @@ public class BlockTagProvider extends BlockTagsProvider {
     @Override
     protected void registerTags() {
         //Ores
-        getBuilder(Tags.Blocks.ORES).add(SocketsTags.Blocks.ORES_RUBY, SocketsTags.Blocks.ORES_SAPPHIRE);
-        getBuilder(SocketsTags.Blocks.ORES_RUBY).add(SocketsBlocks.RUBY_ORE.get());
-        getBuilder(SocketsTags.Blocks.ORES_SAPPHIRE).add(SocketsBlocks.SAPPHIRE_ORE.get());
+        func_240522_a_(Tags.Blocks.ORES).addTags(SocketsTags.Blocks.ORES_RUBY, SocketsTags.Blocks.ORES_SAPPHIRE);
+        func_240522_a_(SocketsTags.Blocks.ORES_RUBY).func_240534_a_(SocketsBlocks.RUBY_ORE.get());
+        func_240522_a_(SocketsTags.Blocks.ORES_SAPPHIRE).func_240534_a_(SocketsBlocks.SAPPHIRE_ORE.get());
 
         //Storage Blocks
-        getBuilder(Tags.Blocks.STORAGE_BLOCKS).add(SocketsTags.Blocks.STORAGE_BLOCKS_RUBY, SocketsTags.Blocks.STORAGE_BLOCKS_SAPPHIRE);
-        getBuilder(SocketsTags.Blocks.STORAGE_BLOCKS_RUBY).add(SocketsBlocks.RUBY_BLOCK.get());
-        getBuilder(SocketsTags.Blocks.STORAGE_BLOCKS_SAPPHIRE).add(SocketsBlocks.SAPPHIRE_BLOCK.get());
+        func_240522_a_(Tags.Blocks.STORAGE_BLOCKS).addTags(SocketsTags.Blocks.STORAGE_BLOCKS_RUBY, SocketsTags.Blocks.STORAGE_BLOCKS_SAPPHIRE);
+        func_240522_a_(SocketsTags.Blocks.STORAGE_BLOCKS_RUBY).func_240534_a_(SocketsBlocks.RUBY_BLOCK.get());
+        func_240522_a_(SocketsTags.Blocks.STORAGE_BLOCKS_SAPPHIRE).func_240534_a_(SocketsBlocks.SAPPHIRE_BLOCK.get());
     }
 }

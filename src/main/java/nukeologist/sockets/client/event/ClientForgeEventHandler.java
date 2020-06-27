@@ -16,6 +16,7 @@
 
 package nukeologist.sockets.client.event;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -58,7 +59,7 @@ public final class ClientForgeEventHandler {
         final ContainerScreen screen = event.getGuiContainer();
         final ItemStack holdingStack = screen.getMinecraft().player.inventory.getItemStack();
         if (holdingStack.isEmpty()) return;
-        if (SocketsAPI.getGem(holdingStack).isPresent()) drawSockets(screen);
+        if (SocketsAPI.getGem(holdingStack).isPresent()) drawSockets(screen, event.getMatrixStack());
     }
 
     //TODO figure out what the int mousebutton means, and cancel if it doesn't match left click ?
@@ -135,7 +136,7 @@ public final class ClientForgeEventHandler {
                 .ifPresent(h -> h.forEach(gem -> list.addAll(gem.getExtraTooltip())));
     }
 
-    private static void drawSockets(ContainerScreen screen) {
+    private static void drawSockets(ContainerScreen screen, final MatrixStack matrix) {
         final List<Slot> slots = screen.getContainer().inventorySlots;
         RenderSystem.color4f(1f, 1f, 1f, 1f);
         RenderSystem.disableDepthTest();
@@ -147,7 +148,7 @@ public final class ClientForgeEventHandler {
                 screen.getMinecraft().getTextureManager().bindTexture(SOCKET);
                 final int size = s.getSlots();
                 //int x0, int y0, int z, float u0, float v0, int width, int height, int textureHeight, int textureWidth
-                AbstractGui.blit(slot.xPos, slot.yPos, 300, (size - 1) * 16, 0, 16, 16, 16, 64);
+                AbstractGui.func_238464_a_(matrix, slot.xPos, slot.yPos, 300, (size - 1) * 16, 0, 16, 16, 16, 64);
                 renderSocketGems(screen.getMinecraft(), s, slot, 0.8f); //maybe change the factor value in config? Also 16 because that's the size of an item.
             });
         }

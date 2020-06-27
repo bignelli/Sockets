@@ -16,6 +16,7 @@
 
 package nukeologist.sockets.common.tileentity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -187,8 +188,8 @@ public class SocketRemoverTileEntity extends TileEntity implements INamedContain
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void func_230337_a_(BlockState useless, CompoundNBT compound) {
+        super.func_230337_a_(useless, compound);
         inv.deserializeNBT(compound.getCompound("inv"));
     }
 

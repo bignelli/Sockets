@@ -17,13 +17,16 @@
 package nukeologist.sockets.common.registry;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -140,9 +143,9 @@ public final class SocketsItems {
         final World world = entity.getEntityWorld();
         if (chargefuls > 0 && !world.isRemote && RANDOM.nextInt(100) < Config.SERVER.lightningChance.get()) {
             final LivingEntity victim = event.getEntityLiving();
-            final LightningBoltEntity bolt = new LightningBoltEntity(world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), false);
+            final LightningBoltEntity bolt = EntityType.LIGHTNING_BOLT.create(world, null, null, null, new BlockPos(victim.getPositionVec()), SpawnReason.EVENT, false, false);//new LightningBoltEntity(world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), false);
             bolt.setCaster((ServerPlayerEntity) entity);
-            ((ServerWorld) world).addLightningBolt(bolt);
+            world.addEntity(bolt);
         }
     }
 

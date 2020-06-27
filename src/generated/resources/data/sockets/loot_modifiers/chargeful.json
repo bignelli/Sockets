@@ -1,5 +1,5 @@
 {
+  "type": "sockets:chargeful",
   "conditions": [],
-  "function": "sockets:chargeful",
   "entity_type": "minecraft:elder_guardian"
 }

@@ -1,4 +1,5 @@
 {
+  "type": "sockets:smelting",
   "conditions": [
     {
       "condition": "minecraft:match_tool",
@@ -6,6 +7,5 @@
         "nbt": "{socketsSmelt:1b}"
       }
     }
-  ],
-  "function": "sockets:smelting"
+  ]
 }

@@ -20,6 +20,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 
 import java.util.Collections;
@@ -115,7 +116,7 @@ public interface IGem {
      */
     default void playEquipSound(ISocketableItem item, LivingEntity entity) {
         final PlayerEntity player = entity.world.isRemote() && entity instanceof PlayerEntity ? (PlayerEntity) entity : null;
-        entity.world.playSound(player, entity.getPosition(),
+        entity.world.playSound(player, new BlockPos(entity.getPositionVec()),
                 SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
                 SoundCategory.NEUTRAL, 1.0f, 1.0f);
     }

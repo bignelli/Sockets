@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -146,6 +147,6 @@ public class SocketRemoverContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return te != null && te.getDistanceSq(playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ()) <= 64D;
+        return te != null && playerIn.getDistanceSq(Vector3d.func_237489_a_(te.getPos())) <= 64D;
     }
 }
