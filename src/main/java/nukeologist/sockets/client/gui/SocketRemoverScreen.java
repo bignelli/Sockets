@@ -46,16 +46,16 @@ public class SocketRemoverScreen extends ContainerScreen<SocketRemoverContainer>
     }
 
     @Override
-    public void func_230430_a_(MatrixStack matrix, int mouseX, int mouseY, float partialTicks) {
-        this.func_230446_a_(matrix);
-        super.func_230430_a_(matrix, mouseX, mouseY, partialTicks);
+    public void render(MatrixStack matrix, int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground(matrix);
+        super.render(matrix, mouseX, mouseY, partialTicks);
         this.func_230459_a_(matrix, mouseX, mouseY);
     }
 
     @Override
-    protected void func_231160_c_() {
-        super.func_231160_c_();
-        this.func_230480_a_(new Button(this.guiLeft + 20, this.guiTop + 10, 64, 20, new TranslationTextComponent(StringTranslations.SOCKET_REMOVER_BUTTON), this::requestRemoval));
+    protected void init() {
+        super.init();
+        this.addButton(new Button(this.guiLeft + 20, this.guiTop + 10, 64, 20, new TranslationTextComponent(StringTranslations.SOCKET_REMOVER_BUTTON), this::requestRemoval));
     }
 
     private void requestRemoval(final Button button) {
@@ -87,9 +87,9 @@ public class SocketRemoverScreen extends ContainerScreen<SocketRemoverContainer>
     protected void func_230450_a_(MatrixStack matrix, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1f, 1f, 1f, 1f);
         Minecraft.getInstance().getTextureManager().bindTexture(TEXTURE);
-        final int x = (this.field_230708_k_ - this.xSize) / 2;
-        final int y = (this.field_230709_l_ - this.ySize) / 2;
-        this.func_238474_b_(matrix, x, y, 0, 0, this.xSize, this.ySize);
+        final int x = (this.width - this.xSize) / 2;
+        final int y = (this.height - this.ySize) / 2;
+        this.blit(matrix, x, y, 0, 0, this.xSize, this.ySize);
     }
 
     @Override   //Mostly copied from Anvil Screen
@@ -99,17 +99,17 @@ public class SocketRemoverScreen extends ContainerScreen<SocketRemoverContainer>
         final int xp = te == null ? 0 : te.getTotalXp();
         if (xp <= 0) return;
         final String s = I18n.format("container.repair.cost", xp);
-        int k = this.xSize - 8 - this.field_230712_o_.getStringWidth(s) - 2;
+        int k = this.xSize - 8 - this.font.getStringWidth(s) - 2;
         int j = 8453920;
         if (mc.player != null && !mc.player.isCreative() && mc.player.experienceLevel < xp) {
             j = 16736352;
         }
-        func_238467_a_(matrix, k - 2, 67, this.xSize - 8, 79, 0x4f000000);
-        this.field_230712_o_.func_238405_a_(matrix, s, (float)k, 69.0F, j);
+        fill(matrix, k - 2, 67, this.xSize - 8, 79, 0x4f000000);
+        this.font.drawStringWithShadow(matrix, s, (float)k, 69.0F, j);
     }
 
-    //@Override
-    //public boolean isPauseScreen() {
-    //    return false;
-    //}
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
 }

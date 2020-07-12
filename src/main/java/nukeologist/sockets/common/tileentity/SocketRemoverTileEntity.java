@@ -188,8 +188,8 @@ public class SocketRemoverTileEntity extends TileEntity implements INamedContain
     }
 
     @Override
-    public void func_230337_a_(BlockState useless, CompoundNBT compound) {
-        super.func_230337_a_(useless, compound);
+    public void read(BlockState useless, CompoundNBT compound) {
+        super.read(useless, compound);
         inv.deserializeNBT(compound.getCompound("inv"));
     }
 

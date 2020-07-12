@@ -87,7 +87,7 @@ public class GemItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT) //Exception to the rule
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        if (Screen.func_231173_s_()) {
+        if (Screen.hasShiftDown()) {
             tooltip.add(new TranslationTextComponent(stack.getTranslationKey() + ".shift.info").func_240699_a_(TextFormatting.GRAY));
         } else {
             tooltip.add(new TranslationTextComponent(StringTranslations.SHIFT_KEY_DOWN).func_240699_a_(TextFormatting.DARK_GRAY));

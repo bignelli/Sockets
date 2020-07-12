@@ -14,7 +14,7 @@ apply plugin: 'maven-publish'
 
 ext {
     MC_VERSION = '1.16.1'
-    FORGE_VERSION = '32.0.23'
+    FORGE_VERSION = '32.0.63'
     MY_VERSION = '1.3.0'
     MODID = 'sockets'
     JEI_VERSION = '6.0.0.3'
@@ -27,7 +27,7 @@ archivesBaseName = 'Sockets'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200514-1.16'
+    mappings channel: 'snapshot', version: '20200707-1.16.1'
 
     runs {
         client {
@@ -125,7 +125,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 }
 // Example configuration to allow publishing using the maven-publish task
 // This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar') 
+//jar.finalizedBy('reobfJar')
 
 publishing {
     publications {
