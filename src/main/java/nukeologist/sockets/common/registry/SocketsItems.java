@@ -107,7 +107,7 @@ public final class SocketsItems {
         int level = event.getLootingLevel();
         if (level >= 3) return;
         final DamageSource source = event.getDamageSource();
-        if (source.getTrueSource() instanceof LivingEntity) {
+        if (source != null && source.getTrueSource() instanceof LivingEntity) {
             final LivingEntity killer = (LivingEntity) source.getTrueSource();
             for (final EquipmentSlotType type : WEAPONS) {
                 final long equipLevel = countGems(killer, SAPPHIRE_GEM.get(), type);
